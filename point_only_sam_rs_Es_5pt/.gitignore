@@ -1,0 +1,32 @@
+# Training outputs
+runs/checkpoints/
+runs/predictions/
+runs/logs/
+runs/report_figs/fig1_gt/
+runs/report_figs/fig1_preds/
+
+# Generated data images
+data/train_point_1cmasks/
+data/train_point_overlays/
+data/train_point_masks/
+data/val_masks_remapped/
+data/legend.png
+
+# Model checkpoints
+*.pt
+*.pth
+*.ckpt
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store

@@ -1,0 +1,21 @@
+checkpoint: runs/dlrsd_pointonly_sam_fixed/epoch_040.pt
+mode: point_set
+pixel_accuracy: 0.6762
+mIoU_present: 0.4561
+class_00_airplane_IoU=0.5517
+class_01_bare_soil_IoU=0.3642
+class_02_buildings_IoU=0.4988
+class_03_cars_IoU=0.5093
+class_04_chaparral_IoU=0.4001
+class_05_court_IoU=0.5730
+class_06_dock_IoU=0.3842
+class_07_field_IoU=0.0775
+class_08_grass_IoU=0.5102
+class_09_mobile_home_IoU=0.4556
+class_10_pavement_IoU=0.6595
+class_11_sand_IoU=0.3008
+class_12_sea_IoU=0.5387
+class_13_ship_IoU=0.4293
+class_14_tanks_IoU=0.5157
+class_15_trees_IoU=0.4394
+class_16_water_IoU=0.5454

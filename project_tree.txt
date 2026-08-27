@@ -1,0 +1,189 @@
+.
+├── checkpoints
+├── dlrsd -> dlrsd_chakraborty_paper
+├── dlrsd_chakraborty_paper
+│   ├── 1st.zip
+│   ├── 20%samples
+│   │   ├── images
+│   │   └── masks
+│   ├── 2nd_Paper
+│   ├── 2nd.zip
+│   ├── 5_column_visualizations
+│   │   ├── 100_prediction.png
+│   │   ├── 101_prediction.png
+│   │   ├── 102_prediction.png
+│   │   ├── 10_prediction.png
+│   │   ├── 1_prediction.png
+│   │   ├── 5_column_comparison.png
+│   │   ├── predictions
+│   │   └── rows
+│   ├── above_mean
+│   │   ├── gt_mask
+│   │   ├── original_images
+│   │   └── pred_mask
+│   ├── advfusion_refined_predictions
+│   │   ├── agric_1962.png
+│   │   ├── airpl_831.png
+│
+├── EXECUTION_MAP.md
+├── PAPER_IMPLEMENTATION_GAPS.md
+├── papers
+│   ├── Chakravorty_Point-to-dense_supervision_framework_for_SAM_based_remote_sensing_segmentation_with_WACVW_2026_paper.pdf
+│   └── pointSAM2409.13401v2.pdf
+├── PointOnlySAM-research01
+│   ├── artifacts
+│   │   └── dlrsd_sam_regions_v2.pt
+│   ├── build_geometry_cache.py
+│   ├── configs
+│   │   ├── dlrsd_pointonly_sam.json
+│   │   ├── dlrsd_pointonly_sam_v2.json
+│   │   └── dlrsd_pointonly_sam_v3a_lora.json
+│   ├── evaluate.py
+│   ├── eval_v2.log
+│   ├── eval_v3a.log
+│   ├── eval_visualize.py
+│   ├── geometry_cache.log
+│   ├── infer.py
+│   ├── launch.sh
+│   ├── legend.png
+│   ├── model-understanding.md
+│   ├── pointonlysam
+│   │   ├── data.py
+│   │   ├── __init__.py
+│   │   ├── model.py
+│   │   ├── objectives.py
+│   │   ├── __pycache__
+│   │   └── runtime.py
+│   ├── __pycache__
+│   │   ├── evaluate.cpython-312.pyc
+│   │   ├── eval_visualize.cpython-312.pyc
+│   │   ├── infer.cpython-312.pyc
+│   │   └── train.cpython-312.pyc
+│   ├── README.md
+│   ├── requirements.txt
+│   ├── run_eval.sh
+│   ├── run_eval_v3a.sh
+│   ├── runs
+│   │   ├── dlrsd_pointonly_sam_v1
+│   │   ├── dlrsd_pointonly_sam_v2
+│   │   └── dlrsd_pointonly_sam_v3a_lora
+│   ├── run_train.sh
+│   ├── run_train_v3a.sh
+│   ├── training.log
+│   ├── training_v2.log
+│   ├── training_v3a.log
+│   └── train.py
+├── point_only_sam_rs_Es_5pt
+│   ├── configs
+│   │   ├── base.py
+│   │   ├── e1_point_only.py
+│   │   ├── e2_prototypes.py
+│   │   ├── e3_teacher_student.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   ├── core
+│   │   ├── colors.py
+│   │   ├── __init__.py
+│   │   ├── losses.py
+│   │   ├── prompts.py
+│   │   ├── prototypes.py
+│   │   ├── pseudo.py
+│   │   └── __pycache__
+│   ├── data
+│   │   ├── class_map.py
+│   │   ├── dataset.py
+│   │   ├── __init__.py
+│   │   ├── make_manifests_active.py
+│   │   ├── make_manifests.py
+│   │   ├── __pycache__
+│   │   ├── train_active.json
+│   │   ├── train.json
+│   │   ├── val.json
+│   │   └── val_masks_remapped
+│   ├── data.zip
+│   ├── evaluate.py
+│   ├── __init__.py
+│   ├── model
+│   │   ├── decoder.py
+│   │   ├── __init__.py
+│   │   ├── lora.py
+│   │   ├── __pycache__
+│   │   └── sam_wrapper.py
+│   ├── point_only_sam_rs_Es_5pt
+│   │   └── runs
+│   ├── __pycache__
+│   │   ├── evaluate.cpython-312.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── run_experiment.cpython-312.pyc
+│   │   └── train.cpython-312.pyc
+│   ├── README.md
+│   ├── run_experiment.py
+│   ├── runs
+│   │   ├── checkpoints
+│   │   ├── logs
+│   │   └── README.md
+│   └── train.py
+├── PointSAM
+│   ├── assets
+│   │   └── overview.jpg
+│   ├── configs
+│   │   ├── base_config.py
+│   │   ├── config_hrsid.py
+│   │   ├── config_nwpu.py
+│   │   └── config_whu.py
+│   ├── data
+│   │   ├── HRSID
+│   │   ├── NWPU
+│   │   └── WHU
+│   ├── datasets
+│   │   ├── augmentation.py
+│   │   ├── HRSID.py
+│   │   ├── __init__.py
+│   │   ├── NWPU.py
+│   │   ├── tools.py
+│   │   └── WHU.py
+│   ├── inference.py
+│   ├── LICENSE
+│   ├── pointSAM2409.13401v2.pdf
+│   ├── pretrain
+│   │   └── Where_To_Save_Pretrained_SAM_Checkpoints
+│   ├── README.md
+│   ├── requirements.txt
+│   ├── scripts
+│   │   ├── train_hrsid_pointsam.sh
+│   │   ├── train_hrsid_selftrain.sh
+│   │   ├── train_hrsid_supervise.sh
+│   │   ├── train_nwpu_pointsam.sh
+│   │   ├── train_nwpu_selftrain.sh
+│   │   ├── train_nwpu_supervise.sh
+│   │   ├── train_whu_pointsam.sh
+│   │   ├── train_whu_selftrain.sh
+│   │   └── train_whu_supervise.sh
+│   ├── segment_anything
+│   │   ├── automatic_mask_generator.py
+│   │   ├── build_sam.py
+│   │   ├── __init__.py
+│   │   ├── modeling
+│   │   ├── predictor.py
+│   │   ├── __pycache__
+│   │   └── utils
+│   ├── train_pointsam.py
+│   ├── train_selftrain.py
+│   ├── train_supervise.py
+│   └── utils
+│       ├── eval_utils.py
+│       ├── finch.py
+│       ├── losses.py
+│       ├── model.py
+│       ├── sam_lora.py
+│       ├── sample_utils.py
+│       ├── tools.py
+│       ├── utils.py
+│       └── visualize.py
+├── project_tree.txt
+├── requirements.txt
+├── RESEARCH_MAP.md
+├── root_structure.txt
+└── sam_vit_b_01ec64.pth
+
+183 directories, 93809 files

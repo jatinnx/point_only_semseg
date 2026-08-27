@@ -1,0 +1,251 @@
+{
+  "background": {
+    "class_idx": 0,
+    "patch_count": 0,
+    "feature_dim": 0,
+    "rgb": [
+      0,
+      0,
+      0
+    ],
+    "prototype_shape": null
+  },
+  "airplane": {
+    "class_idx": 1,
+    "patch_count": 30,
+    "feature_dim": 512,
+    "rgb": [
+      166,
+      202,
+      240
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "bare soil": {
+    "class_idx": 2,
+    "patch_count": 208,
+    "feature_dim": 512,
+    "rgb": [
+      128,
+      128,
+      0
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "buildings": {
+    "class_idx": 3,
+    "patch_count": 211,
+    "feature_dim": 512,
+    "rgb": [
+      0,
+      0,
+      128
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "cars": {
+    "class_idx": 4,
+    "patch_count": 271,
+    "feature_dim": 512,
+    "rgb": [
+      255,
+      0,
+      0
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "chaparral": {
+    "class_idx": 5,
+    "patch_count": 34,
+    "feature_dim": 512,
+    "rgb": [
+      0,
+      128,
+      0
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "court": {
+    "class_idx": 6,
+    "patch_count": 32,
+    "feature_dim": 512,
+    "rgb": [
+      128,
+      0,
+      0
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "dock": {
+    "class_idx": 7,
+    "patch_count": 30,
+    "feature_dim": 512,
+    "rgb": [
+      255,
+      233,
+      233
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "field": {
+    "class_idx": 8,
+    "patch_count": 26,
+    "feature_dim": 512,
+    "rgb": [
+      160,
+      160,
+      164
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "grass": {
+    "class_idx": 9,
+    "patch_count": 308,
+    "feature_dim": 512,
+    "rgb": [
+      0,
+      128,
+      128
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "mobile home": {
+    "class_idx": 10,
+    "patch_count": 30,
+    "feature_dim": 512,
+    "rgb": [
+      90,
+      87,
+      255
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "pavement": {
+    "class_idx": 11,
+    "patch_count": 377,
+    "feature_dim": 512,
+    "rgb": [
+      255,
+      255,
+      0
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "sand": {
+    "class_idx": 12,
+    "patch_count": 67,
+    "feature_dim": 512,
+    "rgb": [
+      255,
+      192,
+      0
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "sea": {
+    "class_idx": 13,
+    "patch_count": 31,
+    "feature_dim": 512,
+    "rgb": [
+      0,
+      0,
+      255
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "ship": {
+    "class_idx": 14,
+    "patch_count": 31,
+    "feature_dim": 512,
+    "rgb": [
+      255,
+      0,
+      192
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "tanks": {
+    "class_idx": 15,
+    "patch_count": 30,
+    "feature_dim": 512,
+    "rgb": [
+      128,
+      0,
+      128
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "trees": {
+    "class_idx": 16,
+    "patch_count": 317,
+    "feature_dim": 512,
+    "rgb": [
+      0,
+      255,
+      0
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  },
+  "water": {
+    "class_idx": 17,
+    "patch_count": 61,
+    "feature_dim": 512,
+    "rgb": [
+      0,
+      255,
+      255
+    ],
+    "prototype_shape": [
+      1,
+      512
+    ]
+  }
+}
