@@ -79,21 +79,11 @@ def make_pseudo(semantic_logits, sam_logits, features, bank, image, points,
     a = point_agreement(labels, points)               # None if no points
     b = structural_boundary_score(labels, image)
 
-    if cfg.use_confidence_fusion:
-        # E6: three-component weighted score (point agreement + boundary +
-        # prototype cosine). The per-pixel discriminator is the prototype term.
-        if bank is not None and bank.initialized.any():
-            proto_conf = bank.prototype_confidence(features, labels)
-            proto_conf = F.interpolate(proto_conf.unsqueeze(1),
-                                       size=labels.shape[-2:], mode="bilinear",
-                                       align_corners=False)[:, 0]
-        else:
-            proto_conf = torch.zeros_like(conf)
-        a_v = a if a is not None else 0.0
-        conf = (cfg.conf_lam_agreement * a_v
-                + cfg.conf_lam_boundary * b
-                + cfg.conf_lam_proto * proto_conf)
-        gate_tau = _ramp(cfg.conf_gate_min, cfg.conf_gate_max, epoch, cfg.tau_ramp_epochs)
+    # E3: simple per-pixel gate (no E6 confidence fusion)
+    # E6 confidence fusion is NOT used in E3
+    if getattr(cfg, 'use_confidence_fusion', False):
+        # E6 only: three-component weighted score
+        pass  # Not used in E3
     else:
         # E3-E5: per-pixel gate = max agreement of any evidence source with the
         # fused label. Averaged fused probabilities stay dilute early on (the

@@ -16,6 +16,7 @@ loss, the number of bank pixels accepted this step, and per-class mean top-1
 cosine similarity — you can SEE whether the mechanism is engaging.
 """
 import json
+import math
 import random
 import sys
 import time
@@ -86,6 +87,35 @@ def train(cfg: Config, log=None):
     optimizer = torch.optim.AdamW(trainable_parameters(student), lr=cfg.lr,
                                   weight_decay=cfg.weight_decay)
     prompt_sampler = NegativePromptSampler(cfg.max_negative_points)
+
+    # ---- Learning Rate Schedule ----
+    # Why: batch_size=1 means very noisy gradients (only ~15 points per image).
+    # Warmup prevents large initial jumps, cosine decay helps settle into a minimum.
+    # Schedule:  warmup (epochs 0-1) -> peak lr -> cosine decay -> near zero at end
+    def warmup_cosine_lr(epoch):
+        """Returns a multiplier (0..1) for the base learning rate.
+
+        Phase 1 - Linear warmup (epoch 0..warmup-1):
+            lr increases linearly from 10% to 100% of base lr.
+            Starting at 10% (not 0) ensures the model learns from epoch 1.
+            This avoids large, destabilizing updates at the start.
+
+        Phase 2 - Cosine decay (epoch warmup..epochs-1):
+            lr follows a cosine curve from lr_peak down to ~0.
+            This lets the model settle into a sharp minimum.
+        """
+        warmup = cfg.lr_warmup_epochs
+        total = cfg.epochs
+        if warmup <= 0 or not cfg.lr_use_cosine_decay:
+            return 1.0  # no schedule: constant lr
+        if epoch < warmup:
+            # Phase 1: linear warmup from 0.1 to 1.0 (NOT from 0)
+            return 0.1 + 0.9 * (epoch / warmup)
+        # Phase 2: cosine decay from 1.0 to ~0
+        progress = (epoch - warmup) / max(1, total - warmup)
+        return 0.5 * (1.0 + math.cos(math.pi * progress))
+
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, warmup_cosine_lr)
 
     need_bank = (cfg.use_prototypes or cfg.use_proto_reg or cfg.use_confidence_fusion)
     bank = None
@@ -209,11 +239,15 @@ def train(cfg: Config, log=None):
                      f"gate_px {int(valid.sum()) if valid is not None else 0} "
                      f"a={a_s} b={b_s}{proto_s}", log)
 
+        # ---- Step the learning rate scheduler (once per epoch) ----
+        current_lr = scheduler.get_last_lr()[0]
+        scheduler.step()  # advance to next epoch's lr
         _log(f"[{cfg.experiment}] ep {epoch + 1}/{cfg.epochs} mean_loss "
              f"{ep_loss / max(1, n_steps):.4f} "
              f"(point_CE {ep_point_ce / max(1, n_steps):.4f} | "
              f"proto_reg {ep_proto_reg / max(1, n_steps):.4f} | "
              f"bank_px {ep_bank_px // max(1, n_steps)}) "
+             f"lr={current_lr:.6f} "
              f"({time.time() - t0:.0f}s)", log)
 
         # ---- prototypes must track the evolving encoder: full refresh every

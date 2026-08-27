@@ -16,6 +16,7 @@ loss, the number of bank pixels accepted this step, and per-class mean top-1
 cosine similarity — you can SEE whether the mechanism is engaging.
 """
 import json
+import math
 import random
 import sys
 import time
@@ -30,7 +31,7 @@ from .configs.base import Config, resolve
 from .core.losses import (boundary_smoothness_loss, consistency_loss,
                           point_cross_entropy, pseudo_cross_entropy)
 from .core.prompts import NegativePromptSampler
-from .core.prototypes import PrototypeBank
+from .core.prototypes import PrototypeBank, MultiPrototypeBank
 from .core.pseudo import make_pseudo
 from .data.dataset import PairAugment, PointOnlyDataset, collate_points
 from .model.sam_wrapper import PointOnlySAM
@@ -87,12 +88,55 @@ def train(cfg: Config, log=None):
                                   weight_decay=cfg.weight_decay)
     prompt_sampler = NegativePromptSampler(cfg.max_negative_points)
 
-    need_bank = (cfg.use_prototypes or cfg.use_proto_reg or cfg.use_confidence_fusion)
+    # ---- Learning Rate Schedule ----
+    # Why: batch_size=1 means very noisy gradients (only ~15 points per image).
+    # Warmup prevents large initial jumps, cosine decay helps settle into a minimum.
+    # Schedule:  warmup (epochs 0-1) -> peak lr -> cosine decay -> near zero at end
+    def warmup_cosine_lr(epoch):
+        """Returns a multiplier (0..1) for the base learning rate.
+
+        Phase 1 - Linear warmup (epoch 0..warmup-1):
+            lr increases linearly from 10% to 100% of base lr.
+            Starting at 10% (not 0) ensures the model learns from epoch 1.
+            This avoids large, destabilizing updates at the start.
+
+        Phase 2 - Cosine decay (epoch warmup..epochs-1):
+            lr follows a cosine curve from lr_peak down to ~0.
+            This lets the model settle into a sharp minimum.
+        """
+        warmup = cfg.lr_warmup_epochs
+        total = cfg.epochs
+        if warmup <= 0 or not cfg.lr_use_cosine_decay:
+            return 1.0  # no schedule: constant lr
+        if epoch < warmup:
+            # Phase 1: linear warmup from 0.1 to 1.0 (NOT from 0)
+            return 0.1 + 0.9 * (epoch / warmup)
+        # Phase 2: cosine decay from 1.0 to ~0
+        progress = (epoch - warmup) / max(1, total - warmup)
+        return 0.5 * (1.0 + math.cos(math.pi * progress))
+
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, warmup_cosine_lr)
+
+    # E3: bank is used for prototypes (E2) and teacher pseudo-labels (E3)
+    # Ported from PointOnlySAM-research01-fixed: use MultiPrototypeBank when configured
+    need_bank = cfg.use_prototypes or cfg.use_teacher_student
     bank = None
     if need_bank:
-        bank = PrototypeBank(cfg.num_classes, 256, cfg.proto_ema, cfg.proto_feature_patch,
-                             cfg.image_size, str(device), cfg.bank_capacity,
-                             cfg.proto_sim_threshold)
+        if getattr(cfg, 'use_multi_prototypes', False):
+            # MultiPrototypeBank: K prototypes per class (handles multi-modal distributions)
+            # Ported from PointOnlySAM-research01-fixed/pointonlysam/fixed_objectives.py
+            bank = MultiPrototypeBank(
+                cfg.num_classes, 256, str(device),
+                prototypes_per_class=cfg.prototypes_per_class,
+                ema=cfg.proto_ema,
+                bank_capacity=cfg.bank_capacity,
+                sim_threshold=cfg.proto_sim_threshold)
+            _log(f"[{cfg.experiment}] using MultiPrototypeBank (K={cfg.prototypes_per_class} per class)", log)
+        else:
+            # Original PrototypeBank: single prototype per class
+            bank = PrototypeBank(cfg.num_classes, 256, cfg.proto_ema, cfg.proto_feature_patch,
+                                 cfg.image_size, str(device), cfg.bank_capacity,
+                                 cfg.proto_sim_threshold)
 
     class_weights = None
     if cfg.class_weighting:
@@ -142,9 +186,10 @@ def train(cfg: Config, log=None):
                     t_feat = teacher.encode(weak)
                     t_sem = teacher.semantic_logits(t_feat, weak.shape[-2:])
                     if cfg.use_sam_prompt_masks:
+                        # E3: use positive prompts only (no negative prompts)
                         sam_w = teacher.sam_class_logits(
                             t_feat, weak.shape[-2], points, prompt_sampler,
-                            use_negative=cfg.use_negative_prompts)
+                            use_negative=False)
                     pseudo, conf_map, valid, fused, a, b = make_pseudo(
                         t_sem, sam_w, t_feat, bank, weak, points, cfg, epoch)
 
@@ -168,19 +213,10 @@ def train(cfg: Config, log=None):
                     s_feat, s_sem, cfg.proto_self_conf_threshold)
                 loss = loss + proto_reg
             elif teacher is not None and valid is not None and valid.any():
+                # E3: pseudo-label loss + consistency loss
                 loss = loss + l_pseudo_eff * pseudo_cross_entropy(s_sem, pseudo, conf_map, valid)
                 loss = loss + cfg.l_consistency * consistency_loss(s_sem, fused)
-                if cfg.use_proto_reg and bank is not None:
-                    proto_reg = cfg.l_proto * bank.cosine_reg(
-                        s_feat, pseudo, conf_map, valid, cfg.proto_pixel_confidence)
-                    loss = loss + proto_reg
-                    bank.update_from_pixels(t_feat, pseudo, conf_map, valid,
-                                            cfg.proto_pixel_confidence,
-                                            cfg.proto_sim_threshold)
-
-            if cfg.use_structural_loss:
-                loss = loss + cfg.l_smooth * boundary_smoothness_loss(
-                    strong, torch.softmax(s_sem, 1))
+                # Note: E4+ proto_reg and E7 structural_loss are NOT used in E3
 
             optimizer.zero_grad(set_to_none=True)
             loss.backward()
@@ -209,11 +245,15 @@ def train(cfg: Config, log=None):
                      f"gate_px {int(valid.sum()) if valid is not None else 0} "
                      f"a={a_s} b={b_s}{proto_s}", log)
 
+        # ---- Step the learning rate scheduler (once per epoch) ----
+        current_lr = scheduler.get_last_lr()[0]
+        scheduler.step()  # advance to next epoch's lr
         _log(f"[{cfg.experiment}] ep {epoch + 1}/{cfg.epochs} mean_loss "
              f"{ep_loss / max(1, n_steps):.4f} "
              f"(point_CE {ep_point_ce / max(1, n_steps):.4f} | "
              f"proto_reg {ep_proto_reg / max(1, n_steps):.4f} | "
              f"bank_px {ep_bank_px // max(1, n_steps)}) "
+             f"lr={current_lr:.6f} "
              f"({time.time() - t0:.0f}s)", log)
 
         # ---- prototypes must track the evolving encoder: full refresh every

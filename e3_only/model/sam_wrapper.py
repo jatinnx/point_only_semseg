@@ -24,7 +24,7 @@ _SAM_INPUT = 1024  # SAM's fixed positional-embedding input size
 
 class PointOnlySAM(nn.Module):
     def __init__(self, checkpoint: str, num_classes: int, device: str,
-                 lora_rank: int = 8, lora_alpha: float = 16.0, lora_dropout: float = 0.0,
+                 lora_rank: int = 12, lora_alpha: float = 32.0, lora_dropout: float = 0.0,
                  background_class: int | None = None,
                  spatial_context: bool = False):
         super().__init__()

@@ -50,7 +50,7 @@ def main(cfg: dict, resume: str | None = None, max_steps: int | None = None) -> 
         ids = torch.tensor([int(p[2]) for p in item["points"]], dtype=torch.long)
         counts.scatter_add_(0, ids, torch.ones_like(ids, dtype=torch.float32))
     class_weights = counts.clamp_min(1).rsqrt()
-    class_weights = (class_weights / class_weights.mean()).clamp(max=4.0).to(device)
+    class_weights = (class_weights / class_weights.mean()).clamp(max=6.0).to(device)
     for item in train_set.items:
         ids = torch.tensor([int(p[2]) for p in item["points"]], dtype=torch.long)
         image_weights.append(float(class_weights.cpu()[ids].mean()) if len(ids) else 1.0)

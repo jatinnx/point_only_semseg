@@ -75,6 +75,13 @@ class Config:
     save_dir: str = "runs/checkpoints"
     save_every: int = 5
 
+    # --- learning rate schedule ---
+    # Warmup: linearly increase lr from 0 to base lr over first N epochs
+    # Decay: cosine decay from base lr to 0 over remaining epochs
+    # This stabilizes training when batch_size=1 (noisy gradients)
+    lr_warmup_epochs: int = 2       # linear warmup for first 2 epochs
+    lr_use_cosine_decay: bool = True  # cosine decay after warmup (False = flat lr)
+
     # --- experiment ladder: which components are on ---
     use_prototypes: bool = False         # E2: live prototype bank + cosine reg (self-supervised)
     use_teacher_student: bool = False    # E3: EMA teacher, per-pixel-gated pseudo labels, consistency
