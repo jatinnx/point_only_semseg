@@ -20,7 +20,7 @@ build/
 # Aider
 .aider*
 
-# Model weights
+# Model weights (large files)
 *.pth
 *.pt
 *.ckpt
@@ -43,11 +43,28 @@ build/
 *.so
 *.o
 
+# Large notebooks (>100MB with embedded outputs)
+dlrsd_chakraborty_paper/Finetune_SAM.ipynb
+dlrsd_chakraborty_paper/colouring.ipynb
+dlrsd_chakraborty_paper/point_dlrsd.ipynb
+dlrsd_chakraborty_paper/segment.ipynb
+dlrsd_chakraborty_paper/NB/Finetune_SAM.ipynb
+dlrsd_chakraborty_paper/NB/Finetune_SAM-checkpoint.ipynb
+dlrsd_chakraborty_paper/NB/colouring.ipynb
+dlrsd_chakraborty_paper/NB/point_dlrsd.ipynb
+dlrsd_chakraborty_paper/NB/point_dlrsd-checkpoint.ipynb
+dlrsd_chakraborty_paper/NB/segment.ipynb
+dlrsd_chakraborty_paper/NB/segment-checkpoint.ipynb
+dlrsd_chakraborty_paper/.ipynb_checkpoints/
+
+# Model checkpoints in runs
+PointOnlySAM-research01-fixed/runs/
+PointOnlySAM-research01-fixedv4/runs/
+PointOnlySAM-research01-fixed/artifacts/
+PointOnlySAM-research01-fixedv4/artifacts/
+
 # Logs
 *.log
-
-# Jupyter
-.ipynb_checkpoints/
 
 # OS files
 .DS_Store
