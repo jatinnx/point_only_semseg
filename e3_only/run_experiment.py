@@ -62,6 +62,7 @@ def main(argv=None):
     parser.add_argument("--val-manifest", default=None)
     parser.add_argument("--save-dir", default=None)
     parser.add_argument("--save-every", type=int, default=None)
+    parser.add_argument("--num-workers", type=int, default=None)
     parser.add_argument("--device", default=None, help="cuda | cpu (default: from config)")
     parser.add_argument("--log", default=None, help="also append log output to this file")
     args = parser.parse_args(argv)
@@ -77,6 +78,8 @@ def main(argv=None):
         cfg.save_dir = args.save_dir
     if args.save_every is not None:
         cfg.save_every = args.save_every
+    if args.num_workers is not None:
+        cfg.num_workers = args.num_workers
     if args.device is not None:
         cfg.device = args.device
     if args.use_refine:

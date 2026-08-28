@@ -63,12 +63,14 @@ class Config:
     save_dir: str = "runs/checkpoints"
     save_every: int = 5
 
+    # --- data augmentation ---
+    multi_scale_crop: bool = False
+    crop_scale_lo: float = 0.5
+    crop_scale_hi: float = 1.0
+
     # --- learning rate schedule ---
-    # Warmup: linearly increase lr from 0 to base lr over first N epochs
-    # Decay: cosine decay from base lr to 0 over remaining epochs
-    # This stabilizes training when batch_size=1 (noisy gradients)
-    lr_warmup_epochs: int = 2       # linear warmup for first 2 epochs
-    lr_use_cosine_decay: bool = True  # cosine decay after warmup (False = flat lr)
+    lr_warmup_epochs: int = 2
+    lr_use_cosine_decay: bool = True
 
     # --- experiment flags ---
     use_prototypes: bool = False         # E2+: live prototype bank + cosine reg
@@ -90,17 +92,16 @@ class Config:
     tau_ramp_epochs: int = 10
 
     # --- prototypes (v2: LIVE bank) ---
-    # Ported from PointOnlySAM-research01-fixed MultiPrototypeBank
-    use_multi_prototypes: bool = True     # use K prototypes per class (handles multi-modal distributions)
-    prototypes_per_class: int = 4         # K sub-prototypes per class (e.g., green chaparral + brown chaparral)
-    proto_ema: float = 0.90               # EMA momentum (lower = faster tracking of moving encoder)
+    proto_ema: float = 0.95
     proto_feature_patch: int = 3
     proto_pixel_confidence: float = 0.80  # min fused conf for TEACHER bank pixels
-    proto_sim_threshold: float = 0.50     # min cosine sim to NEAREST sub-prototype for bank acceptance
-    bank_capacity: int = 512              # per-class-slot FIFO capacity
+    proto_sim_threshold: float = 0.30     # min cosine sim to prototype for bank acceptance
+    bank_capacity: int = 512              # per-class FIFO capacity
+    # NEW in v2:
     proto_refresh_every: int = 10         # full re-init from ALL train points every N epochs
     proto_self_conf_threshold: float = 0.85  # min softmax-max conf for SELF bank updates (E2)
-    proto_use_refine_at_eval: bool = False   # apply bank refine() at eval time (default OFF)
+    proto_use_refine_at_eval: bool = False   # apply bank refine() at eval time (default OFF — it
+                                             # was inert at best, corrupting at worst in v1)
 
     # --- fusion weights (E3) ---
     fusion_w_sem: float = 0.45

@@ -67,9 +67,18 @@ collapsing all appearances to one vector.
         # K prototypes per class: (num_classes, K, feat_dim)
         self.prototypes = torch.zeros(num_classes, self.k, feat_dim, device=device)
         self.seen = torch.zeros(num_classes, self.k, dtype=torch.bool, device=device)
+        # Backing field for compatibility property
+        self._initialized = torch.zeros(num_classes, dtype=torch.bool, device=device)
         # Per-class-slot FIFO bank for live updates
         self.bank = {c: {s: deque(maxlen=bank_capacity) for s in range(self.k)}
                      for c in range(num_classes)}
+
+    @property
+    def initialized(self):
+        """Compatibility property: True if any sub-prototype has been seen for that class.
+        Used by make_pseudo() which expects bank.initialized."""
+        self._initialized = self.seen.any(dim=1)
+        return self._initialized
 
     @torch.no_grad()
     def initialize_from_dataset(self, model, items, image_size: int, device: str):
@@ -302,6 +311,35 @@ collapsing all appearances to one vector.
         if not all_losses:
             return feat.sum() * 0.0
         return torch.stack(all_losses).mean()
+
+    def point_margin_loss(self, features: torch.Tensor, points: list[torch.Tensor],
+                           image_size: int, margin: float = 0.15) -> torch.Tensor:
+        """Point margin loss — ported from PointOnlySAM-research01-fixed.
+
+        For each annotated point, maximize gap between:
+          - similarity to own class's best sub-prototype (positive)
+          - similarity to nearest competing class's sub-prototype (negative)
+
+        Original: PointOnlySAM-research01-fixed/pointonlysam/fixed_objectives.py
+        """
+        terms = []
+        _, _, h, w = features.shape
+        p = F.normalize(self.prototypes, dim=2)  # (C, K, D)
+        for bi, sample in enumerate(points):
+            if not isinstance(sample, torch.Tensor):
+                sample = torch.tensor(sample, device=features.device)
+            for x, y, c in sample.tolist():
+                c = int(c)
+                if c < 0 or c >= self.num_classes or not self.seen[c].any():
+                    continue
+                xx = min(w - 1, max(0, int(x * w / image_size)))
+                yy = min(h - 1, max(0, int(y * h / image_size)))
+                feat = F.normalize(features[bi, :, yy, xx], dim=0)
+                sim = torch.einsum("ckd,d->ck", p, feat).masked_fill(~self.seen, -1e4).max(1).values
+                pos = sim[c]
+                neg = sim.masked_fill(torch.arange(self.num_classes, device=sim.device) == c, -1e4).max()
+                terms.append(F.relu(margin - (pos - neg)))
+        return torch.stack(terms).mean() if terms else features.sum() * 0.0
 
     @torch.no_grad()
     def engagement_stats(self, feat: torch.Tensor, labels=None):

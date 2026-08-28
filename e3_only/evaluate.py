@@ -48,7 +48,7 @@ def evaluate(cfg: Config, checkpoint: str, val_manifest: str | None = None, log=
                          cfg.lora_rank, cfg.lora_alpha, cfg.lora_dropout,
                          cfg.background_class,
                          spatial_context=cfg.spatial_context).to(device)
-    ckpt = torch.load(checkpoint, map_location=device)
+    ckpt = torch.load(checkpoint, map_location=device, mmap=True)
     state = ckpt.get("teacher") or ckpt.get("student")
     if state is None:
         raise KeyError(f"checkpoint has neither 'teacher' nor 'student': {list(ckpt)}")
