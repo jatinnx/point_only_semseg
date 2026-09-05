@@ -1,0 +1,605 @@
+================================================================================
+CLAUDE MEMORY — point_only_semseg / e3_only (PRISM)
+last updated: 2026-09-04
+================================================================================
+
+READ THIS FIRST
+---------------
+THE EXECUTION BLOCK IS OVER. Python, GPU training, and eval all run now. The
+"nothing has ever been executed" warning that used to sit here is RETIRED, and so
+is section 7's blocked-command list. Sections 1-5 are still accurate as history;
+sections 6 and 7 have been rewritten to the post-execution state.
+
+Everything in section 0 below is measured or observed, never inferred.
+
+
+================================================================================
+0. CURRENT STATE — 2026-09-04  (read this before doing anything)
+================================================================================
+
+0.1 THE BASELINE OF RECORD WAS SAVED WITHOUT ITS LoRA. THIS IS THE BUG.
+    Every checkpoint in e3_only/runs/prism-no-shadow/ — the 0.5493 that 0.1 of
+    the 2026-09-02 memory called "THE REAL BASELINE" — contains
+        38 of 132 trainable tensors.  ALL 96 LoRA A/B MATRICES ARE ABSENT.
+    Measured three ways on the SAME epoch-20 file:
+        in-training eval (live model in RAM)      mIoU 0.5493
+        offline eval of the file on disk          mIoU 0.1807
+        epoch 40 + region vote, offline           mIoU 0.1428
+    Cause: an older trainable_state() did
+        {k: v for k, v in model.state_dict().items() if k in trainable_names}
+    and whatever state_dict() did not expose was dropped WITH NO ERROR. 0.5493 is
+    a real number produced by a real model, but that model no longer exists
+    anywhere on disk and cannot be reproduced from these files.
+
+    THE DAMAGE IS NOT THE SCORE, IT IS THE PICTURES. The 6596 PNGs in
+      _archive/prism-superseded/prism-no-shadow-eval-outputs/preds_ep20/
+      _archive/prism-superseded/prism-no-shadow-eval-outputs/preds_ep40_regionvote/
+    are the output of the 0.18 network. Those are the images the user has been
+    judging, and every "shadow issue / blurry boundary / misclassification"
+    complaint about PRISM was formed on them. Both dirs now carry DO_NOT_USE.txt;
+    runs/prism-no-shadow/INVALID_CHECKPOINTS.md holds the table above.
+
+    NOT AFFECTED: everything from prism-v5-corrected onward stores 132 keys with
+    all 96 LoRA tensors. v5-corrected's offline eval reproduces its in-training
+    0.5477 EXACTLY, which is the control that proves the pipeline is sound and
+    only those files are broken.
+
+0.2 SO THE BASELINE OF RECORD IS NOW v5-corrected, 0.5477, OFFLINE-REPRODUCIBLE
+      e3_only/e3_only/runs/prism-v5-corrected   mIoU 0.5477 @ep35   <- quote this
+      e3_only/runs/prism-no-shadow              0.5493 in-training, DEAD ON DISK
+    0.548 +/- 0.002 as a two-seed mean is still defensible (the two configs differ
+    in 5 of 89 fields, none a hyper-parameter), but every FIGURE, every prediction
+    image and every ablation row must come from v5-corrected or later.
+
+0.3 GUARDS ADDED SO A CHECKPOINT CAN NEVER LIE AGAIN
+    train_prism.trainable_state()  now diffs the trainable-name set against the
+      dict it is about to return and raises RuntimeError naming the lost tensors.
+      A run that cannot save itself dies at the save instead of at the paper.
+    evaluate_prism.evaluate()  the old WARNING on missing LoRA keys is now FATAL
+      and name-independent: it intersects load_state_dict's `missing` with
+      requires_grad names. decoder.presence.* is the one whitelisted absence
+      (pre-dates the head, inert at --presence-gate 0); anything else raises.
+      Every eval now prints "loaded N/132 trained tensors".
+
+0.4 THE SHADOW BRANCH HAD NEVER RUN. NOT ONCE. IT OOMs.
+    Every PRISM run ever evaluated used --ablation no-shadow-improved, which sets
+    w_shadow = w_shead = 0. That was never a design choice — with w_shadow > 0 the
+    run dies at the FIRST shadowed step:
+        torch.OutOfMemoryError in attn.softmax, 360 MiB free of 15.57 GiB
+    because _SAM_INPUT=1024 upsamples 256->1024 before the ViT, so one
+    grad-carrying encoder pass is 4096 tokens x 12 blocks ~ 11.8 GiB and the
+    student + shadowed twin need two of them.
+    FIXED: model/net.py::PrismNet.checkpointed(), a context manager that flips
+    self.grad_checkpoint; encode() then routes to _encode_blocks(), a
+    reimplementation of ImageEncoderViT.forward with each of the 12 blocks in
+    torch.utils.checkpoint (use_reentrant=False). Reimplemented rather than
+    wrapped so NO PARAMETER IS RENAMED and checkpoints stay loadable both ways.
+    train_prism scopes it to the shadowed pass only.
+    VERIFIED ON THE LIVE 40-EPOCH RUN, not just a smoke test: epoch 3 is the first
+    epoch with e_shadow=3 active and it logged shadow=0.4645 shead=0.6723 as epoch
+    means (per-step peaks shadow=0.887 shead=0.889), GPU 13506/16380 MiB, no OOM.
+    MEASURED COST: epochs 0/1/2 = 363/355/360 s (0.57 s/step, no shadowed pass),
+    epoch 3 = 813 s (1.29 s/step). 2.26x wall-clock; 40 epochs ~8.7 h vs ~4.0 h.
+    CONFOUND TO STATE IN THE PAPER: both v8 rows run at --batch-size 1
+    (run_queue_v8.sh:81) because the shadowed pass needs the headroom even with
+    checkpointing. Treatment and control match each other, so treatment-minus-
+    control is sound; NEITHER is comparable to the 0.5477 baseline, which was
+    trained at batch 2. Do not read a v8 number against 0.5477.
+    Consequence for the paper: the ablation table has had a `no-shadow` row and no
+    shadow-on row to compare it against. Illumination invariance is a claimed
+    contribution that has been multiplied by zero in every measured number.
+
+0.5 GEOMETRY IS NOT THE BOTTLENECK — MEASURED AND NOW REPRODUCIBLE
+    NEW TOOL: e3_only/tools/oracle_partition.py, output archived at
+    e3_only/artifacts/oracle_partition_val.txt. Label every region of the frozen
+    partition with its majority GT class = the upper bound of anything L_hom /
+    L_self / L_prop / the region vote can reach. Over all 1319 val images:
+        ALL-REGIONS  mIoU 0.7412  PA 0.8651  (100% of px forced region-constant)
+        SAM-ONLY     mIoU 0.9438  PA 0.9765  (57.56% of px forced)
+    (An earlier ad-hoc script said 0.9436 for the second row; the tool's 0.9438 is
+    the reproducible number, and the SAM-ONLY row is HIGHER precisely because it
+    forces fewer pixels — the two bracket the machinery, they do not compete.)
+    The partition supports 0.9438. The model delivers 0.5477. The missing ~40pp is
+    in the CLASSIFIER, not the shape prior.
+    Per-class all-regions ceilings show where region-constant labelling itself
+    costs something: dock 0.4637, chaparral 0.4919, trees 0.5996 are the only
+    three under 0.62, while SAM-ONLY is >= 0.8389 for all 17.
+    METHOD.md sec 6 claimed the homogeneity ceiling upper-bounds sec 4.7/4.10
+    without ever quoting it; sec 6 and sec 5 now carry these numbers.
+
+0.6 WHAT THE ERRORS ACTUALLY ARE (intact 0.5477 model, all 1319 val images)
+    NEW FLAG: tools/diagnose_failures.py --confusion-csv writes the ROW-NORMALISED
+    17x17 matrix and prints each class's two dominant destinations. The printed
+    top-12 list ranks pairs by ABSOLUTE mass and therefore CANNOT show a small
+    class's failure (field is 183k px of 86M) -- that flag exists because of it.
+    Artifacts: e3_only/artifacts/diagnose_v5corrected_0.5477.txt
+               e3_only/artifacts/confusion_v5corrected_rownorm.csv
+    recall  class         dominant destinations (share of that class's true px)
+    0.345   field         grass 0.479, pavement 0.149
+    0.438   sand          bare soil 0.179, pavement 0.156
+    0.467   bare soil     grass 0.185, pavement 0.109
+    0.543   dock          ship 0.350, water 0.040      <- was mis-remembered as ~65%
+    0.668   buildings     pavement 0.109, mobile home 0.103
+    0.694   airplane      cars 0.140, pavement 0.100
+    0.699   water         grass 0.128, ship 0.064
+    the other ten classes recall 0.77-0.93.
+    PRECISION failures a recall column hides: mobile home rec 0.810 / prec 0.488,
+    and buildings->mobile home alone is 34.2% of every pixel predicted mobile home
+    (0.99M of 2.88M).
+    Biggest confusions by absolute pixel mass:
+        bare soil->grass     2.08M      buildings->pavement  1.04M
+        bare soil->pavement  1.23M      bare soil->trees     1.02M
+        grass->trees         1.18M      buildings->mobile home 0.99M
+    And the decisive split in the same file:
+        0.2201 of ALL error is in GT regions >=200px predicted >80% HOMOGENEOUSLY
+               but with the WRONG CLASS   <- right shape, wrong name
+        0.0210 of ALL error is what a 5x5 majority filter would fix
+        speckle 0.0160 of px, GHOST 0.2263, FLOOD 0.0106
+        shadow-like px error 0.3193 vs 0.2546 elsewhere = ratio 1.254 (16.8% of px)
+    Every top pair is spectrally adjacent and semantically arbitrary at the pixel
+    level (a green pixel IS both grass and field). That is a NAMING problem, and it
+    is exactly what 0.5's oracle predicts.
+
+0.7 E3 vs PRISM: 14 TERMS BOUGHT +0.60pp, AND THE USER IS RIGHT TO ASK
+        PRISM 14 terms   -   E3 3 terms   =   +0.60pp mIoU
+        6 of 17 classes REGRESSED
+        excluding chaparral, PRISM is -0.55pp WORSE than E3
+        rho(E3 per-class IoU, PRISM per-class IoU) = +0.809
+        the worst-5 classes are THE SAME FIVE in both models
+    A correlation that high with an identical worst-5 says the two models fail on
+    the same pixels for the same reason, and that reason survives replacing the
+    entire loss. The failure is upstream of the objective — it is what the encoder
+    can separate, and 0.5/0.6 say so independently.
+
+    NOW PROVEN CLASS BY CLASS. tools/diagnose_failures --confusion-csv was run on
+    BOTH saved prediction sets (artifacts/diagnose_E3_ep30.txt +
+    confusion_E3_ep30_rownorm.csv beside the PRISM pair). Same tool, same defs:
+      10 OF 17 CLASSES SEND THEIR LARGEST ERROR TO THE IDENTICAL WRONG CLASS,
+      and field / bare soil / sand / dock are the four weakest in BOTH.
+      class        E3rec  PRISMrec  E3 dominant        PRISM dominant
+      field        0.338  0.345     grass 0.450        grass 0.479     same
+      bare soil    0.418  0.467     grass 0.199        grass 0.185     same
+      sand         0.477  0.438     pavement 0.201     bare soil 0.179
+      dock         0.660  0.543     ship 0.222         ship 0.349      same
+      chaparral    0.595  0.832     bare soil 0.323    bare soil 0.103 same  <- THE win
+      buildings    0.686  0.668     pavement 0.141     pavement 0.109  same
+      grass        0.746  0.775     trees 0.094        trees 0.082     same
+      airplane     0.803  0.694     pavement 0.100     cars 0.140
+    chaparral +0.237 recall is THE reason the headline is +0.60pp; strip it and the
+    average goes to -0.55pp. EIGHT classes lost recall, dock worst at -0.117.
+    Failure RATES, same tool both sides (E3 ep30 | PRISM 0.5477):
+      pixel error        0.2761 | 0.2655       GHOST      0.2358 | 0.2263
+      FLOOD              0.0144 | 0.0106       speckle    0.0101 | 0.0160  <- WORSE
+      5x5-fixable error  0.0133 | 0.0210  <- WORSE
+      shadow-like/else   1.313  | 1.254   (0.3443/0.2622 vs 0.3193/0.2546)
+      right shape wrong label  0.2082 | 0.2201
+      veg/soil within-group    0.3189 | 0.2866
+    So L_potts + L_hom did NOT deliver smoothness (speckle 1.6x E3's), and the
+    1.254 shadow ratio was measured with the shadow terms OFF — it is the number
+    the v8 shadow-on row has to beat, not evidence that the shadow model works.
+
+0.8 WHAT IS RUNNING RIGHT NOW
+    PID 77885   bash e3_only/run_queue_v8.sh   (setsid nohup, detached)
+                log: e3_only/runs/_queue_v8/queue.log, all paths absolute
+                ROW 1  --ablation improved            -> runs/prism-v8-shadow-on
+                ROW 2  --ablation no-shadow-improved  -> runs/prism-v8-shadow-off
+                40 epochs each, batch 1. On rc=0 each row runs eval_four against
+                its newest *_best.pt: plain / --presence-gate 1.0 / --region-vote /
+                both, three with --save-preds. rc!=0 skips the evals deliberately.
+    THIS IS THE FIRST SHADOW-ON RUN IN THE PROJECT. The pair is the ablation row
+    that 0.4 says has never existed. CONFIRMED LIVE at epoch 3:
+        e003 ... shadow=0.866 shead=0.868      <- non-zero for the first time ever
+    (shadow=0.000 on some steps is correct, shadow_prob=0.65.) GPU 13505/16380 MiB
+    with checkpointing on, i.e. the headroom holds.
+    MEASURED rate: epochs 0-2 took 363/355/360 s per 630-step epoch (0.57 s/step);
+    epoch 3, the first with the shadowed pass, took 813 s (1.29 s/step) -- 2.26x.
+    ETA from the measured timings: row 1 = 3x360 + 37x813 ~= 8.7 h from 12:48, so
+    ~21:30; row 2 (no shadowed pass, 40 x ~360 s) ~= 4.0 h after that, plus four
+    evals per row. Row 2 is the CHEAP one, not "5h" -- it has no shadowed pass.
+    Startup lines confirmed in runs/prism-v8-shadow-on/train_stdout.log:
+        "amp=bf16  curriculum: hom@1 shadow@3 self@8 (ramp 3)"
+        "measured constants: inventory_leak=0.0 prop_eps=0.04 (spent per class)"
+    shadow=0.000 in the e000 lines is CORRECT — e_shadow=3.
+
+0.9 STILL TRUE FROM 2026-09-02 (do not re-litigate)
+    - LoRA rank 12 is a regression: v6 (r=12) 0.4438@ep5 vs r=8 0.4677@ep4.
+      Default is back to 8/16. lora_rank/lora_alpha are in ARCH_FIELDS so v6's
+      own checkpoint still evaluates correctly from its stored config.
+    - The five 2026-09-03 changes and the measurement that forced each one:
+      inventory_leak 0.05->0.0 (PIXEL RISK 0.0000, 630/630); prop_eps 0.10->0.040
+      spent per class (purity 0.960, label-free estimator rho=+0.801); w_bnd
+      0.15->0.30 with edge_radius 2->1 (trimap3 PA 0.5953 vs PA 0.7345); presence
+      head at w 0.30 (10.52% of val px are a class the image's inventory excludes);
+      eval region vote SAM-only (449 conflict regions at hom purity 0.686, and the
+      conflict exclusion cannot run at test time).
+    - TWO OF MY OWN DESIGNS ARE DEAD, DO NOT RESURRECT: filler-region trust
+      multiplier in L_prop (fill_big purity 0.9624 vs SAM 0.9669, indistinguishable)
+      and excluding large filler from L_hom/L_self (fill/kept/big 0.9658 is the
+      PUREST bucket; the 0.686 damage is entirely in the 449 conflict regions,
+      which never enter the loss). n_sam survives for the eval-time vote only.
+    - resolve() IS PACKAGE-ROOT-FIRST: PRISM/e3_only/<path> is tried BEFORE
+      cwd/<path>, which is where e3_only/e3_only/ came from. Always pass an
+      absolute --save-dir. --checkpoint bypasses resolve() and is cwd-relative;
+      --log and --save-preds do not.
+    - metrics.jsonl keys are val_mIoU / val_PA and files are prefixed by
+      experiment name. Region npz needs allow_pickle=True. Checkpoints are
+      f"{cfg.experiment}_best.pt", the tensors live under the top-level key
+      'teacher' (EMA weights), beside 'epoch' / 'config' / 'mIoU'.
+      96.69M total / 2.9582M trainable. MEASURED key counts: v5-corrected and
+      v6-lora12 hold 132, prism-no-shadow holds 38, and the 96-key difference is
+      exactly sam.image_encoder.blocks.*.{attn.qkv,attn.proj,mlp.lin1,mlp.lin2}.{A,B}
+      — i.e. the whole adapter. A current run adds 4 decoder.presence.* on top.
+    - `proto live 0/68` is COSMETIC. Disproved. Do not re-investigate (sec 5).
+    - A `kill -TERM 910498` was DENIED by the auto-mode classifier. Moot, that
+      process died in the 2026-09-03 17:16 reboot, but do not retry the pattern.
+
+================================================================================
+1. WHAT WE ARE BUILDING
+================================================================================
+Point-only weakly-supervised semantic segmentation of DLRSD.
+  17 classes, 256x256, 630 train / 1319 val.
+  0% dense labels at training time. Val masks read in exactly one file
+  (evaluate_prism.py) plus the two measurement tools; nothing feeds back.
+
+Method name: PRISM = Point-inventory, Region-consistency, Illumination-invariant
+Semantic Mapping. Full write-up lives in e3_only/METHOD.md (this is the paper
+draft — keep it in sync with the code, it is the deliverable).
+
+Scope rule from the user, still in force: ONLY e3_only. The loss in
+PointOnlySAM-research01-fixed is rejected as not research-oriented and must not
+be reused or referenced as a design.
+
+The six failure modes the method must fix (the user's own taxonomy):
+  1 salt-and-pepper noise
+  2 ghost class hallucination
+  3 dominant class flooding
+  4 shadow mislabelling
+  5 correct shape, wrong label
+  6 spectral class confusion (chaparral<->bare soil, field<->grass, sand<->pavement)
+
+
+================================================================================
+2. WHY E3 FAILED (all measured, not suspected)
+================================================================================
+- mIoU 0.5417 @ep30 -> 0.5037 @ep50. PA 0.7239 -> 0.7000. ALL 17 classes lose
+  ground. Worst: chaparral -16.2pp, sea -9.2pp, sand -6.0pp.
+  Training longer made it monotonically worse. That is a self-referential loss.
+- 67% of E3's gradient came from the network's own EMA copy; the 33% from a human
+  touched 0.02% of pixels (~15 of 65536).
+- proto_reg logged 0.0000 for all 50 epochs -> prototype path 100% INERT
+  (train.py:205 guards it with `teacher is None`; E3 always has a teacher).
+- boundary_smoothness_loss was imported and NEVER CALLED. Its weight l_smooth=0.2
+  never did anything. No boundary term has ever run in this project.
+- Blur ceiling: PrototypeBank.logits returned raw cosine in [-1,1] with no
+  temperature; softmax over 17 classes is near-flat, fused teacher peaked ~0.74.
+  CE onto a target with max 0.74 is minimised AT p=0.74 (Gibbs) -> the student
+  could never sharpen. THIS is the blur, not the gate.
+- SAM fed the wrong input range: sam_wrapper.encode() called image_encoder on
+  [0,1] values. SAM expects (x*255 - mean)/std, mean~123 std~58 -> the encoder
+  got ~1/60 of expected contrast; LoRA was burning capacity compensating.
+- CORRECTION to previousmemory.txt: it claims the per-pixel gate "never rejected
+  one pixel". WRONG. The log shows gate_px 41246-54604 of 65536. The gate was
+  working; the load-bearing defect is the fusion/blur cap above.
+- The thing that was available and unused: make_manifests.py:sample_points emits
+  up to 5 clicks FOR EVERY CLASS PRESENT. So the clicks reveal the class SET
+  S(I) for free. E3 used them as ~15 labelled pixels only. 12-14 of 17 classes
+  are suppressible per image. This observation is what PRISM is built on.
+
+
+================================================================================
+3. THE PRISM LOSS (what to defend in the paper)
+================================================================================
+Curriculum by INFORMATION SOURCE: human-derived -> image-derived ->
+frozen-geometry -> model-derived LAST.
+
+human-derived
+  L_point  CosFace additive angular margin at clicked pixels
+  L_prop   CE on point->region propagation, label-smoothed INSIDE S with a
+           MEASURED eps (not tuned). Conflict regions excluded everywhere.
+  L_abs    THE CENTRAL TERM. Partial-label / candidate-set max likelihood:
+             -log( eta + (1-eta) * sum_{c in S} p_c )
+           Removes C-|S| degrees of freedom at ALL 65536 pixels. With leak eta>0
+           the loss is bounded by -log(eta) and the gradient by (1-eta)/eta, so
+           an image where a class was never clicked contributes bounded penalty
+           instead of being punished for being right. -> kills mode 2 structurally.
+  L_pres   MIL top-k coverage. SEE SECTION 4 — this was changed this session.
+  L_area   one-sided area floor from propagation, gamma=0.60. GT never violates it.
+  L_phead  ADDED 2026-09-02. The inventory as a PREDICTION TARGET, not only as a
+           constraint. 1x1 stack on the decoder trunk -> LSE-pooled over space at
+           T=0.5 -> 17 logits -> multi-label BCE against S(I), pos_weight 4.1146
+           (MEASURED: mean |S(I)| = 3.3238 over 630 images). Minimiser sigma(z_c)=1
+           for c in S(I), else 0. WHY IT EXISTS: every other inventory term dies at
+           inference because a test image has no clicks, and 10.52% of val pixels
+           are a class the image's own inventory excludes. This is the only
+           inventory mechanism that survives to test time. LSE not mean pooling: a
+           40px class is 0.06% of a mean, so mean pooling learns only big classes,
+           and the hallucinated classes are precisely the small ones.
+           Applied at inference as a SOFT prior, never a hard mask:
+             logit_c += lambda * log(sigma(z_c)*(1-delta) + delta),  delta=0.05
+           so a wrong "absent" costs log(0.05) ~ -3.0 instead of deleting a class
+           from an image that contains it. lambda=0 (default) is the identity.
+
+image-derived
+  L_potts  edge-aware Potts / dense-CRF pairwise, as a TRAINING loss
+  L_bnd    ONE-SIDED boundary precision: penalise predicted discontinuity only
+           where no contour is allowed. One-sided on purpose — a two-sided term
+           rewards drawing contours, and under 0% supervision the cheapest way to
+           earn that is to over-segment.
+  L_sh     shadow equivariance (dichromatic model, log-average luminance
+           invariance theorem)
+  L_shead  asymmetric shadow-head BCE (negatives at weight 0.3; clean view pushed
+           to 0 ONLY inside the synthesised blob, so the head learns contrast and
+           not "dark implies shadow")
+
+frozen-geometry
+  L_hom    region homogeneity by SHARPENED SELF-DISTILLATION, t_R ~ (region mean
+           projected onto S)^(1/tau), stop-grad.
+           KEY PROOF: under the coupled iteration the uniform distribution is a
+           STRICT REPELLER with multiplier 1/tau > 1; one-hots are the attractors.
+           This is exactly why it is NOT written as within-region JS/divergence
+           minimisation — for D_R = H(mean p) - mean H(p) >= 0, EVERY constant
+           assignment is a global minimum with value 0, a whole degenerate
+           manifold including uniform. JS kept only as an ablation row.
+
+model-derived, LAST (epoch 8+)
+  L_self   hard region pseudo-labels through 5 filters in this order: project
+           onto S -> average per region -> drop tiny/conflict/already-clicked ->
+           adaptive tau = mu - kappa*sigma over an EMA of region confidences plus
+           a top-2 margin -> emit HARD labels.
+           KEY PROOF (bounded target family): the set of targets L_self can EVER
+           present is finite and DOES NOT GROW WITH TRAINING STEPS, because the
+           partition R comes from pretrained SAM before step 1 and never changes.
+           E3's target family was the whole simplex at every pixel and moved with
+           the network. THIS is the structural reason degradation should stop.
+           Hard not soft, because Gibbs caps the student at max_c t_c.
+  L_anc    prototypes pulled to an EMA of ANNOTATED-pixel features only
+  L_rep    within-class prototype repulsion (stops K collapsing to 1)
+
+Anti-confirmation-bias mechanism, stated plainly: the SAM region partition is
+class-agnostic, computed ONCE by grid-prompt AMG, cached, and FROZEN. Nothing the
+network predicts can change it.
+
+
+================================================================================
+4. CHANGES — 2026-08-29 SESSION (Edit/Write only; unexecuted AT THE TIME.
+   All of it has since been executed and compiles; see 0.9.)
+================================================================================
+
+(a) SUBSTANTIVE LOSS FIX — L_pres witness set sized by evidence
+    core/inventory.py::present_coverage_loss
+    core/objective.py (call site reordered)
+    configs/prism.py (new field + new ablation row)
+    train_prism.py (threads the new switch)
+    METHOD.md §4.4 rewritten, §8 table + a fourth de-confounding note
+
+    THE BUG: k was a constant, max(64, 0.005*65536) = 327. Every present class
+    was required to produce 327 confident pixels. A class that truly covers 40px
+    can only satisfy that by OVER-CLAIMING ~8x. That pressure falls hardest on
+    exactly the rare classes the method exists to rescue (ship, court, tanks,
+    mobile home) and surfaces as failure mode 5 charged to the NEIGHBOUR's pixels.
+    Root cause: k was doing two jobs. Its only legitimate job is gradient
+    stability (k=1 is max-pooling, unstable at batch 1). Area estimation is
+    L_area's job and L_area does it from a bound GT provably satisfies.
+
+    THE FIX: k_c = clip(|P_c|, k_min=64, k_max=327), where |P_c| is the same
+    propagated pixel count L_area constrains against.
+      - large class: cap binds, k_c = 327, behaviour unchanged
+      - 40px class: k_c = 64, the stability floor, nothing more
+      - class with no propagated region (click fell in a conflict region):
+        |P_c| = 0 -> k_c = 64. Correct default: the inventory still asserts the
+        class exists, and nothing has been measured about its size.
+    Since k_c <= k_max always, this ONLY EVER RELAXES the term. Anti-flooding is
+    untouched — flooding is blocked by L_abs and L_area, never by this ceiling.
+    |P_c| is read off integer labels so k_c carries no gradient.
+    Comparison pinned to fp32 with an int64 arange: in vals.dtype a bf16
+    autocast would round 327 -> 328.
+    New ablation row `const-k-present` (pres_const_k=True) makes the claim
+    testable. READ THAT ROW ON RARE-CLASS IoU AND BOUNDARY PRECISION, NOT mIoU —
+    the classes it should hurt contribute least to the mean.
+
+(b) train_prism.py — latent KeyError fixed
+    The degradation-warning branch did m['mIoU'] after `best` was set. If a later
+    run_eval returns {} it raises. Now reads miou = m.get("mIoU") once and guards
+    both branches on `is not None`.
+
+(c) evaluate.py — FOUR defects fixed (this file produces the paper's BEFORE column)
+    - removed a call to PrototypeBank.refine, WHICH DOES NOT EXIST. The branch
+      could only ever have raised AttributeError. Now reports the flag as
+      unimplemented and carries on un-refined. Changes no baseline number: both
+      use_prototypes and proto_use_refine_at_eval default to False.
+    - replaced an O(86M) Python per-pixel loop with the SAME np.bincount
+      expression evaluate_prism.py uses. This is a COMPARABILITY fix, not just a
+      speed fix.
+    - `gt` was unbound at the _save_prediction_images call if the first batch had
+      no mask. Now gt = None.
+    - _sample_gt_points: the per-class body sat OUTSIDE `for c in range(...)`, so
+      only the last class ever got points, and a maskless image raised NameError
+      on an unbound `ys`. Re-indented, plus max(1, h//3) guards and a per-class
+      RNG seed.
+
+(d) tools/validate_regions.py — removed two dead variables (sx, sy) my earlier
+    edit had orphaned. This tool SETS prop_eps from measurement, so it is
+    load-bearing.
+
+(e) configs/base.py::resolve — docstring stated its precedence BACKWARDS. The
+    code checks the PACKAGE ROOT first and only falls back to cwd. Corrected.
+
+(f) core/structure.py — documented a real off-by-one I found and cleared:
+    region_boundary pads in both directions so a disagreeing pair marks both of
+    its members. Exact for the two axis-aligned shifts. For the two DIAGONALS the
+    marked pixel is the one diagonally adjacent to both members, i.e. off by one
+    step. Harmless because every consumer dilates — but that makes
+    edge_radius >= 1 a CORRECTNESS requirement of the diagonal terms, not merely
+    a tolerance. Recorded in both docstrings so nobody later assumes exactness.
+
+(g) METHOD.md §8 rewritten earlier this session: added a third column naming what
+    configs/prism.py::ablation actually changes, plus de-confounding notes.
+      - no-shadow is LOSSES ONLY (stem + head kept; no-invariant-stem is the
+        separate representation row)
+      - js-homogeneity isolates the sharpening alone, because
+        region_js_divergence takes the same `present` projection and the same
+        `conflict` exclusion
+      - no-region and no-boundary are COMPOUND BY NECESSITY and are labelled as
+        such (L_prop/L_hom/L_self are all DEFINED ON the partition; L_bnd is
+        one-sided so it is only meaningful beside a smoothness term)
+
+(h) METHOD.md new §9.1 "Reading the before/after table": SPECKLE is identical by
+    construction between the two tools (ones-kernel filter2D == boxFilter with
+    normalize=False, both tie-break to the lower class index). GHOST and FLOOD
+    were NOT identical, so diagnose_failures.py now prints both definitions with
+    the eval-matching one marked `<- quote this one`.
+    NOTE: the numerals in that section are FORMAT ONLY (<num>/<den> = 0.xxxx).
+    I had first drafted it with invented numbers (412/2183, 91/300) and removed
+    them — nothing in METHOD.md is a measured value until §10 step 2 has run.
+
+
+================================================================================
+5. AUDIT VERDICTS (by hand, 2026-08-29. Superseded where 0.9 measured the same
+   thing; the FALSE ALARMS list below is still binding.)
+================================================================================
+VERIFIED CORRECT
+  core/inventory.py    absent_class_loss IS exactly -log((1-eta)*sum_S p + eta),
+                       via logaddexp, numerically stable, bounded loss and
+                       bounded gradient as the paper claims. _NEG_INF = -1e4 is
+                       safe ONLY because the loss is forced to fp32.
+  model/net.py         clean. SAM normalisation fix present at line 71 behind
+                       sam_normalize. shadow_prob IS emitted (line 78).
+  core/protobank.py    clean.
+  core/shadow.py       all shapes align. synth_shadow -> (B,H,W);
+                       shadow_head_loss squeezes; shadow_edge_mask adds/removes
+                       the channel internally. No silent broadcast.
+  model/decoder_v2.py  every key the objective reads exists. The non-tensor
+                       "classifier" entry passes through f32() untouched.
+  core/structure.py    edge_aware_potts_loss, image_edges (per-image quantile;
+                       65536 elements is far under torch.quantile's ~16M limit),
+                       dilate, candidate_boundary, boundary_precision_loss all
+                       correct. forbidden.sum()==0 -> clamp -> loss exactly 0,
+                       which is the right reading.
+  objective runs in fp32: model(image) is inside amp_ctx(), the objective call is
+                       OUTSIDE it. Confirmed by line position.
+
+FALSE ALARMS I RAISED AND THEN DISPROVED — DO NOT RE-INVESTIGATE
+  - "finch_init can pick an empty cluster and produce a NaN prototype": NO.
+    finch_first_partition relabels union-find roots to CONTIGUOUS ids, so every
+    id in 0..n_clusters-1 is non-empty.
+  - "classifier.ema_decay assignment in train_prism.py is silently inert": NO.
+    ema_decay is a real __init__ attribute (protobank.py:122) and IS read by
+    update_ema.
+  - "finch_init could shape-mismatch the EMA shadow re-sync": NO. It writes IN
+    PLACE under no_grad, preserving Parameter shape and identity.
+  - "net.py doesn't emit shadow_prob": WRONG, it does.
+  - "load_state_dict(strict=False) silently skips shape mismatches": WRONG, it
+    raises. strict=False only tolerates missing/unexpected KEYS.
+
+METRIC COMPARABILITY — RETIRED BY VERIFICATION, NOT ASSUMPTION
+  evaluate.py and evaluate_prism.py read the SAME val.json, whose masks live in
+  val_masks_remapped (already 0..16), both resize INTER_NEAREST to image_size,
+  and both build the confusion matrix with the same np.bincount expression over
+  the same 0 <= y < C test. => baseline mIoU and PRISM mIoU ARE the same quantity.
+
+DATA / PATHS the blocked commands depend on — all verified present
+  630 train manifest items <-> 630 masks in dlrsd/train_1cmasks, stems match,
+    so validate_inventory's `n == 0` SystemExit will NOT fire
+  1319 val images <-> 1319 val manifest items
+  SAM ViT-B checkpoint present, 375 MB
+  e3_only/artifacts/ DOES NOT EXIST YET -> the region cache is unbuilt, and
+    train_prism.py raises a helpful FileNotFoundError telling you to build it
+  resolve() anchors relative paths package-root-first, and build_region_cache
+    writes the same resolved string the config reads
+
+STILL OPEN
+  - see section 7's "WHAT IS STILL OPEN" — the live gap is v7's numbers, not the
+    ability to run anything
+  - E3-side defects, only relevant to the comparison rows, deliberately NOT
+    fixed so the baseline stays the baseline: dead `teacher is None` prototype
+    guard; boundary_smoothness_loss never called; structural_boundary_score and
+    point_agreement not behind the logging condition; eval-script epoch/log-dir
+    mismatches; run_eval_standalone.py:10 builds a bare Config()
+
+
+================================================================================
+6. THE MEASURED CONSTANTS — NOW SET; DO NOT GUESS OR SWEEP THEM
+================================================================================
+  inventory_leak (eta)       = 0.0000  <- validate_inventory.py, "PIXEL RISK"
+  prop_eps (epsilon)         = 0.040   <- validate_regions.py, 1 - purity
+  pres_head_pos_weight       = 4.1146  <- validate_inventory.py, mean |S(I)| =
+                                          3.3238, so (C - m)/m balances the BCE
+
+The placeholders are GONE. Both old ones (0.05 / 0.10) erred in the direction that
+costs accuracy, so "erring high is safe" was true about the constraint and false
+about the score: eta=0.05 reserved 5% of every pixel's mass for classes the image
+provably lacks, and eps=0.10 told the net to distrust 10% of propagated labels when
+4.0% are wrong.
+
+eps is additionally SPENT UNEVENLY over the 17 classes (per_class_prop_eps=True).
+The SCALE is the measured 0.040. The DISTRIBUTION is label-free — click-conflict
+frequency with a Poisson detection-probability debias, from
+tools/measure_prop_trust.py, written to artifacts/prop_trust.json:
+    q_c^obs = #{regions with a c click AND a foreign click} / #{regions with a c click}
+    d_r     = 1 - exp(-(|r|/HW) * F_c),        q_c = q_c^obs / max(d_c, 0.05)
+    eps_c   = clip( eps * q_c / sum_c' w_c' q_c',  0.01, 0.50 ),  w_c = px share
+Dense masks VALIDATE its rank ordering (Spearman rho = +0.801; only +0.500 without
+the debias) and NEVER produce it. train_prism.py logs a warning and falls back to
+the scalar if the json is missing or malformed — it never fabricates the vector.
+Changing any of these three is a claim about the ANNOTATIONS and must be
+re-measured with the named tool, not tuned.
+
+validate_regions.py also prints the Voronoi abandonment check. If region
+propagation does not beat nearest-point Voronoi, THE PARTITION IS ADDING NOTHING
+and the design should be reconsidered rather than tuned. The tool says so itself.
+
+
+================================================================================
+7. COMMANDS — ALL OF THESE NOW RUN. cwd = point_only_semseg/PRISM
+================================================================================
+The old blocked-command list is retired; items 1-6 of it all completed. What is
+left is the standing recipe. Interpreter is
+    /home/cse-sdpl/Downloads/point_only_semseg/.venv/bin/python
+
+  # measure (already done; re-run only if the manifests or the cache change)
+  python -m e3_only.tools.validate_inventory       # -> eta 0.0000, mean|S| 3.3238
+  python -m e3_only.tools.build_region_cache --split train
+  python -m e3_only.tools.build_region_cache --split val
+  python -m e3_only.tools.validate_regions         # -> eps 0.040
+  python -m e3_only.tools.measure_prop_trust       # -> artifacts/prop_trust.json
+  python -m e3_only.tools.verify_invariance
+
+  # train — the measured constants are DEFAULTS now, do not pass --leak/--prop-eps
+  python -m e3_only.train_prism --ablation full --save-dir runs/<name>
+
+  # eval — four rows, the headline is the ungated per-pixel argmax
+  R=runs/<name>; CK=$R/PRISM-<ablation>_best.pt
+  python -m e3_only.evaluate_prism --checkpoint $CK --save-preds $R/preds_plain --log $R/eval_plain.log
+  python -m e3_only.evaluate_prism --checkpoint $CK --presence-gate 1.0 --save-preds $R/preds_presence_gate --log $R/eval_presence_gate.log
+  python -m e3_only.evaluate_prism --checkpoint $CK --region-vote --log $R/eval_region_vote.log
+  python -m e3_only.evaluate_prism --checkpoint $CK --presence-gate 1.0 --region-vote --save-preds $R/preds_gate_and_vote --log $R/eval_gate_and_vote.log
+
+  # or let the queue do train-then-eval unattended (this is what PID 929569 is)
+  nohup bash e3_only/run_queue_v7.sh >/dev/null 2>&1 &
+
+WHAT IS STILL OPEN, honestly
+  - v7's own numbers. NOTHING about whether the five changes actually close the
+    2.2pp gap has been measured yet — v7 has not started (the GPU is held by v6).
+    When the queue's eval_plain.log lands, THAT is the first evidence. Until then
+    the five changes are justified by the diagnostics they were derived from, which
+    is not the same thing as being validated.
+  - the 17-row ablation ladder (13 old rows + no-presence-head, scalar-prop-eps,
+    wide-boundary, and the inference switches) has not been run.
+  - the E3-side defects listed under section 5 STILL OPEN are deliberately NOT
+    fixed, so the baseline stays the baseline.
+
+================================================================================
+8. USER PREFERENCES / WORKING AGREEMENT
+================================================================================
+- Act autonomously. "dont reply on me what i say" — do not push decisions back.
+- ONLY e3_only. Do not touch or reuse PointOnlySAM-research01-fixed's loss.
+- Read /home/cse-sdpl/Downloads/point_only_semseg/papers for grounding.
+- New architecture is allowed and encouraged where justified, not required.
+- Goal is conference-publishable: every term needs a stated minimiser and a
+  proof or a measurement, not a plausible story. The user asked for "proofs that
+  this will work", so METHOD.md carries the propositions.
+- Deliverable is prediction images visibly close to ground truth, plus the
+  before/after table and the ablation ladder.
+- Never put invented numbers anywhere. If a value is not measured yet, write
+  0.xxxx and say it is a format placeholder.
+================================================================================

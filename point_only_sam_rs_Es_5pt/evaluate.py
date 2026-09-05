@@ -16,8 +16,8 @@ import torch
 from torch.utils.data import DataLoader
 
 from .configs.base import Config, resolve
-from .data.class_map import CLASS_NAMES
-from .data.dataset import PointOnlyDataset, collate_points
+from ..PRISM.data.class_map import CLASS_NAMES
+from ..PRISM.data.dataset import PointOnlyDataset, collate_points
 from .model.sam_wrapper import PointOnlySAM
 
 
@@ -176,7 +176,7 @@ def _sample_gt_points(gt, per_class=5):
     annotated points): erode each class region, then grid-spread up to
     ``per_class`` points. Returns a list of (x, y, class) tuples.
     """
-    from .data.class_map import PALETTE
+    from ..PRISM.data.class_map import PALETTE
     h, w = gt.shape
     pts = []
     for c in range(len(PALETTE)):

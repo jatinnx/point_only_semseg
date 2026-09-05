@@ -1,0 +1,17 @@
+0: airplane
+1: bare_soil
+2: buildings
+3: cars
+4: chaparral
+5: court
+6: dock
+7: field
+8: grass
+9: mobile_home
+10: pavement
+11: sand
+12: sea
+13: ship
+14: tanks
+15: trees
+16: water

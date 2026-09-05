@@ -1,0 +1,21 @@
+checkpoint: training2-runs/checkpoints/epoch_040.pt
+mode: image_only
+pixel_accuracy: 0.6842
+mIoU_present: 0.4615
+class_00_airplane_IoU=0.5542
+class_01_bare_soil_IoU=0.3327
+class_02_buildings_IoU=0.4877
+class_03_cars_IoU=0.5213
+class_04_chaparral_IoU=0.3620
+class_05_court_IoU=0.6279
+class_06_dock_IoU=0.4066
+class_07_field_IoU=0.1218
+class_08_grass_IoU=0.5247
+class_09_mobile_home_IoU=0.4036
+class_10_pavement_IoU=0.6856
+class_11_sand_IoU=0.3316
+class_12_sea_IoU=0.6671
+class_13_ship_IoU=0.2836
+class_14_tanks_IoU=0.4914
+class_15_trees_IoU=0.4511
+class_16_water_IoU=0.5933

@@ -1,8 +1,0 @@
-=== PHASE 2 SUMMARY (FINE-TUNING ONLY) ===
-Training epochs: 5
-Batch size: 1
-Learning rate: 1e-5
-Training samples: 630
-Original model IoU: 0.9108
-Final model IoU: 0.9108
-Final average loss: 0.1097

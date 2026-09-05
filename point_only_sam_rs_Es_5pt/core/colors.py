@@ -5,7 +5,7 @@ prediction PNG and its legend can never disagree about a class colour.
 """
 import numpy as np
 
-from ..data.class_map import CLASS_NAMES, PALETTE
+from ...PRISM.data.class_map import CLASS_NAMES, PALETTE
 
 
 def colorize(labels, palette=PALETTE):

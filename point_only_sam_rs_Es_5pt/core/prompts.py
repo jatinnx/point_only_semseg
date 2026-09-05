@@ -10,7 +10,7 @@ def draw_points(image_rgb, points, radius=5):
     evaluator for the ``<id>_points.png`` output.
     """
     from PIL import Image, ImageDraw
-    from ..data.class_map import PALETTE
+    from ...PRISM.data.class_map import PALETTE
     img = image_rgb.copy()
     pil = Image.fromarray(img)
     d = ImageDraw.Draw(pil)

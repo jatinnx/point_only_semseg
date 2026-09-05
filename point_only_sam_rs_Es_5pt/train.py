@@ -33,7 +33,7 @@ from .core.losses import (boundary_smoothness_loss, consistency_loss,
 from .core.prompts import NegativePromptSampler
 from .core.prototypes import PrototypeBank
 from .core.pseudo import make_pseudo
-from .data.dataset import PairAugment, PointOnlyDataset, collate_points
+from ..PRISM.data.dataset import PairAugment, PointOnlyDataset, collate_points
 from .model.sam_wrapper import PointOnlySAM
 from .model.lora import clone_teacher, ema_update, trainable_parameters
 

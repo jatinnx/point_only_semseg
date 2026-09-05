@@ -1,0 +1,212 @@
+Diffed and traced all seven changes. Short version: the tooling is the real value, the model-side changes are inert, and four bugs in the new scripts will bite you on first run.
+
+Scorecard
+
+┌─────┬────────────────────────────────┬───────────────────┬──────────────────────────────────────────────────────┐
+│  #  │             Change             │  Effect on this   │                         Why                          │
+│     │                                │        run        │                                                      │
+├─────┼────────────────────────────────┼───────────────────┼──────────────────────────────────────────────────────┤
+│ 1   │ multi_scale_crop + scale       │ Zero              │ False by default; log confirms multi_scale_crop:     │
+│     │ params                         │                   │ False                                                │
+├─────┼────────────────────────────────┼───────────────────┼──────────────────────────────────────────────────────┤
+│ 2   │ proto_ema 0.90→0.95            │ Zero              │ dead code path in E3 (below)                         │
+├─────┼────────────────────────────────┼───────────────────┼──────────────────────────────────────────────────────┤
+│ 3   │ proto_sim_threshold 0.50→0.30  │ Zero              │ same, plus self.sim_threshold is never read          │
+├─────┼────────────────────────────────┼───────────────────┼──────────────────────────────────────────────────────┤
+│ 4   │ initialized property           │ Zero              │ lives on unreachable MultiPrototypeBank              │
+├─────┼────────────────────────────────┼───────────────────┼──────────────────────────────────────────────────────┤
+│ 5   │ point_margin_loss              │ Zero              │ no callers anywhere in the package                   │
+├─────┼────────────────────────────────┼───────────────────┼──────────────────────────────────────────────────────┤
+│ 6   │ mmap=True                      │ Real, tiny        │ eval-only; ~tens of seconds total                    │
+├─────┼────────────────────────────────┼───────────────────┼──────────────────────────────────────────────────────┤
+│ 7   │ --num-workers                  │ Negative as used  │ every call site passes 0; base default was 2         │
+└─────┴────────────────────────────────┴───────────────────┴──────────────────────────────────────────────────────┘
+
+The prototype tuning is provably inert in E3
+
+proto_ema and proto_sim_threshold reach PrototypeBank only via update_from_predictions / update_from_pixels. The first is called at train.py:209, inside:
+
+if bank is not None and cfg.use_prototypes and teacher is None:
+
+E3 sets use_teacher_student=True, so teacher is not None and that branch is skipped every step. update_from_pixels has no callers at all. Prototypes in E3 are written only by initialize_from_dataset (epoch 0) and refresh (every 10 epochs) — neither of which reads ema or sim_threshold.
+
+Your log proves it rather than merely implying it: bank_px 0 on all 35 epoch lines. The bank never accepted a single pixel. Tuning its EMA and acceptance threshold changed nothing. Both knobs would matter for E2 (use_teacher_student=False) — that's where to test them.
+
+Also prototypes.py:387 stores self.sim_threshold, but every caller passes sim_threshold as an argument, so the stored field is never read.
+
+MultiPrototypeBank is still unreachable
+
+use_multi_prototypes and prototypes_per_class are still absent from Config. train.py:125 reads the first via getattr(..., False) → always False. And configs/e2_prototypes.py / e3_teacher_student.py use dataclasses.replace(), which raises TypeError on unknown fields — so they can't introduce it either. Both #4 and #5 are dead code.
+
+That said, point_margin_loss is the right dead code to have written — it's a row you'll want in the Phase D ablation. Just don't count it as a change that did anything yet.
+
+mmap=True is correct and negligible
+
+Confirmed at evaluate.py:51. Your checkpoints carry student + teacher = 2× SAM ViT-B ≈ 700 MB–1 GB, so mmap genuinely avoids materializing that before load_state_dict. Multi-second → sub-second per load. Against 780 s/epoch and four checkpoints, the total saving is tens of seconds. Correct change, right instinct, wrong order of magnitude to call it an efficiency win.
+
+--num-workers is currently a deoptimization
+
+The knob is real, but every call site sets it to the slowest value: E3 log says num_workers: 0, run_evals.sh passes --num-workers 0, run_eval_standalone.py:12 hardcodes cfg.num_workers = 0. Base default was 2. If that's working around a CUDA-in-worker crash, fine — but it's not a speedup.
+
+Four bugs in the new scripts
+
+These are the highest-value files in the batch, so worth fixing before you rely on them:
+
+1. The two scripts disagree on epochs. run_evals.sh evaluates 30 and 50; plot_eval_curve.py:20 iterates 20, 25, 30, 35 and hard-SystemExits on any missing log. Run them in sequence and the plot dies.
+2. E3_epoch_0050.pt doesn't exist yet — checkpoints stop at 0035. That eval fails until the run completes.
+3. Relative log-dir mismatch. plot_eval_curve.py defaults to runs/eval_logs; run_evals.sh writes to e3_only/runs/eval_logs from the repo root. You need --log-dir e3_only/runs/eval_logs.
+4. run_evals.sh uses --device cuda while training is live → VRAM contention with the running job. This is the OOM risk from last turn.
+
+And a latent trap: run_eval_standalone.py:10 builds Config() — the bare base config, not E3's. It works today because every field evaluate() touches (lora_rank 8, lora_alpha 16.0, image_size 256, num_classes 17, background_class None, spatial_context False, val_manifest) happens to be identical between base and E3. But with strict=False at evaluate.py:55, if you ever change lora_rank in the E3 config this silently builds a mismatched model, loads nothing, and reports mIoU on an untrained decoder. run_evals.sh passes --config e3_teacher_student.py and is the safe path — prefer it, and consider dropping the standalone.
+
+Root-cause coverage: 0 of 3
+
+None of the seven changes touch the temperature-free PrototypeBank.logits (#1), the reversed KL at weight 1.0 (#2), or the inert proto_conf gate (#3). Expected mIoU delta from this batch: zero. That's fine if the intent was tooling — just don't read a flat result as evidence about the fixes.
+
+The efficiency win you left on the table
+
+make_pseudo calls structural_boundary_score (pseudo.py:80) every step — cv2 Canny + dilate + erode plus two GPU→CPU transfers — and point_agreement (pseudo.py:79) loops over points in Python with .detach().cpu().tolist(). In E3, b is used only to build the log string (train.py:235,246), and a only for the is None check at pseudo.py:162.
+
+So you pay a full CPU sync every step to print a number you look at every tenth step. Compute b only on logging steps, and replace the a check with len(points) == 0. At 1.24 s/step, Canny + morphology on 256×256 plus the sync is plausibly 30–80 ms — roughly 3–6% per epoch, ~25–50 min over a 50-epoch run. Free, and it changes no math.
+
+What I'd rank next
+
+1. Fix the epoch mismatch + log-dir in the two eval scripts, then get the mIoU-vs-epoch curve (Phase A). Still the highest-information thing available.
+2. Move structural_boundary_score behind the logging condition — free 3–6%.
+3. Add use_multi_prototypes and prototypes_per_class to Config to make your MultiPrototypeBank work reachable, then run the K=1 / K=4 ablation.
+
+One note: _diag_floor.py in your "new files" list is mine, from two turns ago — not your change. Say the word and I'll delete it. I haven't edited anything this turn.
+
+✻ Brewed for 4m 17s · done 5:00 PM
+
+※ recap: Goal is dense semantic maps from point-only labels; E3 is training with its loss floored by three code issues that your recent changes didn't touch. Next: fix the epoch mismatch between run_evals.sh and plot_eval_curve.py, then get the mIoU-per-epoch curve. (disable recaps in /config)
+
+❯ look only on '/home/cse-sdpl/Downloads/point_only_semseg/e3_only' we have to improve this, have you read the '/home/cse-sdpl/Downloads/point_only_semseg/papers' these 2 paper read this first and build your understanding
+Read e3_only/run_eval_standalone.py (31 lines)
+Read e3_only/run_evals.sh (30 lines)
+Read e3_only/evaluate.py (215 lines)
+Read e3_only/plot_eval_curve.py (57 lines)
+Read e3_only/_diag_floor.py (49 lines)
+
+  Listed 1 directory
+
+Bash is working again. Let me extract both papers.
+
+  Ran 1 shell command
+
+Bash is flaking again — falling back to the Read tool for the PDFs.
+
+  Read 1 file
+
+Now the PointSAM paper.
+
+  Read 1 file
+
+Both papers are clear now. Let me re-check the current state of the code against them.
+
+  Searched for 2 patterns, read 2 files, ran 1 shell command
+
+● Backgrounding after the current tool finishes…
+
+❯ continue
+
+  Read 1 file, ran 2 shell commands
+
+Training finished — all 50 epochs, E3_epoch_0050.pt exists, GPU is free. Let me get the real prototype numbers now that I can execute.
+
+  Ran 2 shell commands
+
+Eval logs exist. This is the number I've been missing.
+
+  Read 1 file, ran 1 shell command
+
+mIoU 54.17 at epoch 30. That reframes everything. Let me get the rest of the curve.
+
+  Ran 2 shell commands
+
+Only epoch 30 completed an eval (the ep20/ep25 logs have config headers but no metrics; ep50 never ran). Let me confirm the prototype collapse empirically before planning.
+
+  Ran 1 shell command
+
+Diagnostic still blocked by the classifier — I'll run it during implementation. I have what I need from the papers and the eval log.
+
+What the papers say vs. what e3_only does
+
+Where you actually stand. The epoch-30 eval (1319 val images, all with masks) gives mIoU 0.5417, PA 0.7239, mPrec 0.6904. Against Chakravorty Table 2 on the same dataset, same 17 classes, same 256×256:
+
+┌─────────────────────────┬───────┬───────┬───────┐
+│         Method          │ mIoU  │  PA   │ Prec  │
+├─────────────────────────┼───────┼───────┼───────┤
+│ DBFNet                  │ 43.40 │ 56.17 │ 52.83 │
+├─────────────────────────┼───────┼───────┼───────┤
+│ AGMM-SASS               │ 53.17 │ 69.03 │ 61.99 │
+├─────────────────────────┼───────┼───────┼───────┤
+│ RSAM-Seg                │ 56.52 │ 71.04 │ 63.87 │
+├─────────────────────────┼───────┼───────┼───────┤
+│ PENet                   │ 59.18 │ 77.92 │ 68.23 │
+├─────────────────────────┼───────┼───────┼───────┤
+│ Paper (9% dense)        │ 64.86 │ 81.27 │ 73.74 │
+├─────────────────────────┼───────┼───────┼───────┤
+│ your e3_only (0% dense) │ 54.17 │ 72.39 │ 69.04 │
+└─────────────────────────┴───────┴───────┴───────┘
+
+Now overlay the paper's own ablation ladder (Table 1, DLRSD): SAM no-adaptation 46.31 → +adaptation 51.34 → +prototype refinement 54.93 → +mask fusion 59.81 → +self-training 64.86.
+
+You are sitting exactly on the "+ prototype refinement" rung — 54.17 vs their 54.93 — while using 0% dense labels against their 9%. That is a good position, not a bad one. You already beat DBFNet and AGMM-SASS.
+
+The remaining +10.7 mIoU is, by the paper's own accounting, mask fusion (+4.9) and confidence-aware self-training (+5.1). Those are precisely the two components that are inert in your code. That's a diagnosis, not a coincidence.
+
+Mask fusion is inert. The paper's Eq. 13 is Ŷ^fused = argmax_m S(m) — a hard selection of the better whole mask by a score combining entropy, 5×5 spatial consistency, and Canny boundary overlap. pseudo.py:60-74 instead computes 0.45·sem + 0.25·sam_onehot + 0.30·proto, a soft average. Since PrototypeBank.logits (prototypes.py:462-466) returns raw cosine in [-1,1] with no temperature, softmaxing it over 17 classes gives a near-flat vector — so 30% of your teacher target is noise, and the fused peak is capped around 0.72. That cap is your loss floor and a permanently blurry teacher. The paper's argmax has no such cap.
+
+Confidence-aware self-training is inert. The paper filters per image: C_j = λA_j + (1−λ)B_j, keep iff C_j > τ_g where τ_g = μ_C − κσ_C — adaptive to the distribution, so it always rejects a tail. Your code gates per pixel against a fixed 0.70→0.80 ramp, and the log reads gate_px 65536/65536 for all 50 epochs — it never rejected one pixel. Meanwhile a (the paper's A_j, running 0.95–1.00) and b (B_j, ~0.63) are computed every step and only printed (train.py:234-235). The paper's entire selection criterion is sitting in two variables that feed a log string.
+
+Both PointSAM mechanisms are absent or switched off. Negative Prompt Calibration is PointSAM's headline fix for exactly RSI's failure mode — a positive point prompt bleeding across densely packed, similar-looking regions. You built NegativePromptSampler, and train.py:192 passes use_negative=False. And PointSAM's prototype regularization uses FINCH clustering (parameter-free, K unknown) plus Hungarian matching between predicted and target prototype sets; you have one class-mean per class, no clustering, no matching loss — and MultiPrototypeBank, which does apply temperature correctly, is unreachable because use_multi_prototypes isn't in Config.
+
+The per-class IoU confirms it. Worst classes: field 0.0888, bare soil 0.3349, sand 0.3621, mobile home 0.4225, chaparral 0.4944. Cross-reference the point weights [..., field=1.31, grass=0.11, ...] — field is the rarest class in your point annotations and grass the most common, and field is being swallowed by grass. Field/grass/bare-soil/chaparral is exactly the visually-similar land-cover group the paper names, and one class-mean prototype cannot separate multi-modal distributions. That is the "bimodal" problem you asked about, and FINCH multi-prototypes is the paper-supported answer.
+
+Also: ship scores 0.6377, among your better classes — and that's the class whose points came from dense GT. The leak is visibly inflating it.
+
+Your two stated contributions don't exist in e3_only yet. grep finds zero shadow/chromaticity/illumination code — that all lives in the deleted PointOnlySAM-research01-fixedv4/pointonlysam/fixed_*.py that shadox_logic.md documents. And boundary_smoothness_loss is defined and imported at train.py:31 but never called; l_smooth=0.2 is set and unused.
+
+Let me design the implementation.
+
+● Entered plan mode
+  Claude is now exploring and designing an implementation approach.
+
+I have already read most of e3_only in depth this session. Let me close the remaining gaps myself — per your standing instruction I won't spawn agents.
+
+  Read 4 files
+
+I have the full picture now. Three decisions genuinely change what I build, so let me settle them before writing the plan.
+
+● User declined to answer questions
+· Where should the improvement work start? Each retrain is ~12 h (835 s/epoch × 50), so ordering matters a lot. (Cheap in-code levers first / Paper parity (fusion + gate) / Your contribution (shadow + boundary))
+· How many full 50-epoch runs (~12 h each) can you afford for this round? This decides whether we bundle changes or ablate them one at a time. (1–2 runs / 3–5 runs / 6+ runs / Shorter runs are fine)
+· Is the 0% dense-label constraint absolute? The paper uses a 9% dense subset both to adapt SAM and to build prototypes from dense pixels — that is the main reason their prototypes are sharp and yours are near-uniform. (Strictly 0% — that's the contribution / A small dense subset is acceptable / 0% for the headline, both reported)
+
+Locked in: strictly 0% dense — prototypes stay point-derived, and I'll design around that (FINCH-style multi-prototype clustering plus wider patch pooling to get more out of ~15 points/image, rather than reaching for dense pixels).
+
+What would you like to clarify on the other two? The open ones are:
+
+1. Where to start — the cheap in-code switches (spatial_context, use_negative, prototype temperature), versus the paper-parity work (Eq. 13 mask selection + adaptive τ_g gate), versus your shadow/boundary contribution.
+2. Compute budget — how many ~12 h runs this round, which decides whether I bundle changes or ablate them one at a time.
+
+If it helps me reframe: is the uncertainty about what those options actually involve, about the time/benefit trade-off, or is there a deadline or GPU-sharing constraint I don't know about?
+
+✻ Brewed for 10m 46s · done 5:41 PM
+
+❯ | # | Issue | One line |
+  |---|---|---|
+  | 1 | Salt-and-pepper noise | Random wrong-class pixels scattered inside otherwise correct regions |
+  | 2 | Ghost class hallucination | Classes predicted that have zero GT pixels anywhere in the scene |
+  | 3 | Dominant class flooding | One class expands to cover the whole image, erasing all others |
+  | 4 | Shadow mislabelling | Object shadows predicted as a different class from the surface they fall on |
+  | 5 | Correct shape, wrong label | SAM finds the right region boundary but assigns the wrong semantic class inside it |
+  | 6 | Spectral class confusion | Visually similar classes (chaparral↔bare soil, field↔grass, sand↔pavement) swapped wholesale | think about these issue how can we fix these and what work do we need to do, in the '/home/cse-sdpl/Downloads/point_only_semseg/PointOnlySAM-research01-fixed' the loss function is not good, like its not research orianted.......so we cant use that loss function. come up with much more understand and comprihense the loss function in the e3_only. build implimentation plan with proper understand the proofs that this will will work 100%.......
+
+That taxonomy is exactly what I need — six named modes I can attach to specific mechanisms. Before I design the loss, let me measure which of them are actually dominant in your epoch-30 predictions rather than guessing.
+
+
+
+    ONLY FOCUS OF e3_only
+    

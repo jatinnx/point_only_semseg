@@ -1,0 +1,4416 @@
+[
+ {
+  "id": "1",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/1.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "10",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/10.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "100",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/100.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "101",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/101.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "102",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/102.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "103",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/103.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    148,
+    224,
+    13
+   ],
+   [
+    37,
+    66,
+    13
+   ],
+   [
+    183,
+    195,
+    13
+   ],
+   [
+    140,
+    62,
+    13
+   ],
+   [
+    180,
+    60,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "104",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/104.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "105",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/105.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    215,
+    41,
+    13
+   ],
+   [
+    134,
+    39,
+    13
+   ],
+   [
+    50,
+    42,
+    13
+   ],
+   [
+    136,
+    129,
+    13
+   ],
+   [
+    52,
+    126,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "106",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/106.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    30,
+    214,
+    13
+   ],
+   [
+    28,
+    44,
+    13
+   ],
+   [
+    27,
+    124,
+    13
+   ],
+   [
+    23,
+    161,
+    13
+   ],
+   [
+    18,
+    113,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "107",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/107.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "108",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/108.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    38,
+    37,
+    13
+   ],
+   [
+    130,
+    35,
+    13
+   ],
+   [
+    214,
+    124,
+    13
+   ],
+   [
+    125,
+    131,
+    13
+   ],
+   [
+    42,
+    134,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "109",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/109.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "11",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/11.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "110",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/110.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    131,
+    26,
+    13
+   ],
+   [
+    37,
+    231,
+    13
+   ],
+   [
+    200,
+    52,
+    13
+   ],
+   [
+    37,
+    34,
+    13
+   ],
+   [
+    97,
+    245,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "111",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/111.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    215,
+    127,
+    13
+   ],
+   [
+    207,
+    40,
+    13
+   ],
+   [
+    212,
+    210,
+    13
+   ],
+   [
+    119,
+    222,
+    13
+   ],
+   [
+    58,
+    212,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "112",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/112.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "113",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/113.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "114",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/114.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "115",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/115.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "116",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/116.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    41,
+    212,
+    13
+   ],
+   [
+    222,
+    206,
+    13
+   ],
+   [
+    214,
+    28,
+    13
+   ],
+   [
+    18,
+    32,
+    13
+   ],
+   [
+    37,
+    158,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "117",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/117.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "118",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/118.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "119",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/119.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "12",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/12.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "120",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/120.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "121",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/121.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    212,
+    127,
+    13
+   ],
+   [
+    42,
+    42,
+    13
+   ],
+   [
+    126,
+    212,
+    13
+   ],
+   [
+    126,
+    42,
+    13
+   ],
+   [
+    128,
+    128,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "122",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/122.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "123",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/123.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "124",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/124.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "125",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/125.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "126",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/126.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "127",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/127.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "128",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/128.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "129",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/129.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    116,
+    238,
+    13
+   ],
+   [
+    200,
+    105,
+    13
+   ],
+   [
+    75,
+    249,
+    13
+   ],
+   [
+    195,
+    96,
+    13
+   ],
+   [
+    95,
+    252,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "13",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/13.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    42,
+    42,
+    13
+   ],
+   [
+    127,
+    42,
+    13
+   ],
+   [
+    42,
+    127,
+    13
+   ],
+   [
+    127,
+    127,
+    13
+   ],
+   [
+    202,
+    213,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "130",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/130.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "131",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/131.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "132",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/132.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "133",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/133.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "134",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/134.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "135",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/135.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "136",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/136.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "137",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/137.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    43,
+    127,
+    13
+   ],
+   [
+    213,
+    37,
+    13
+   ],
+   [
+    42,
+    48,
+    13
+   ],
+   [
+    212,
+    136,
+    13
+   ],
+   [
+    140,
+    37,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "138",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/138.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "139",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/139.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    45,
+    214,
+    13
+   ],
+   [
+    46,
+    118,
+    13
+   ],
+   [
+    212,
+    247,
+    13
+   ],
+   [
+    118,
+    238,
+    13
+   ],
+   [
+    93,
+    118,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "14",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/14.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "140",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/140.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "141",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/141.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "142",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/142.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "143",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/143.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    205,
+    128,
+    13
+   ],
+   [
+    124,
+    43,
+    13
+   ],
+   [
+    125,
+    128,
+    13
+   ],
+   [
+    200,
+    209,
+    13
+   ],
+   [
+    133,
+    211,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "144",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/144.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "145",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/145.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "146",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/146.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "147",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/147.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    211,
+    41,
+    13
+   ],
+   [
+    211,
+    212,
+    13
+   ],
+   [
+    37,
+    41,
+    13
+   ],
+   [
+    43,
+    230,
+    13
+   ],
+   [
+    39,
+    99,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "148",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/148.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "149",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/149.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    39,
+    128,
+    13
+   ],
+   [
+    12,
+    239,
+    13
+   ],
+   [
+    182,
+    115,
+    13
+   ],
+   [
+    162,
+    102,
+    13
+   ],
+   [
+    62,
+    83,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "15",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/15.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "150",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/150.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    126,
+    129,
+    13
+   ],
+   [
+    61,
+    122,
+    13
+   ],
+   [
+    127,
+    193,
+    13
+   ],
+   [
+    62,
+    59,
+    13
+   ],
+   [
+    121,
+    73,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "151",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/151.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "152",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/152.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    39,
+    140,
+    13
+   ],
+   [
+    53,
+    177,
+    13
+   ],
+   [
+    47,
+    184,
+    13
+   ],
+   [
+    46,
+    189,
+    13
+   ],
+   [
+    7,
+    111,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "153",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/153.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "154",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/154.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "155",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/155.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    226,
+    46,
+    13
+   ],
+   [
+    66,
+    74,
+    13
+   ],
+   [
+    118,
+    29,
+    13
+   ],
+   [
+    240,
+    61,
+    13
+   ],
+   [
+    240,
+    49,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "156",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/156.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "157",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/157.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    128,
+    125,
+    13
+   ],
+   [
+    75,
+    117,
+    13
+   ],
+   [
+    189,
+    189,
+    13
+   ],
+   [
+    153,
+    181,
+    13
+   ],
+   [
+    175,
+    130,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "158",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/158.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    123,
+    130,
+    13
+   ],
+   [
+    210,
+    151,
+    13
+   ],
+   [
+    135,
+    189,
+    13
+   ],
+   [
+    67,
+    135,
+    13
+   ],
+   [
+    198,
+    184,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "159",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/159.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "16",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/16.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "160",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/160.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "161",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/161.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    41,
+    126,
+    13
+   ],
+   [
+    37,
+    215,
+    13
+   ],
+   [
+    37,
+    48,
+    13
+   ],
+   [
+    109,
+    68,
+    13
+   ],
+   [
+    95,
+    103,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "162",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/162.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "163",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/163.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "164",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/164.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "165",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/165.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "166",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/166.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    128,
+    42,
+    13
+   ],
+   [
+    215,
+    129,
+    13
+   ],
+   [
+    42,
+    220,
+    13
+   ],
+   [
+    40,
+    130,
+    13
+   ],
+   [
+    118,
+    220,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "167",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/167.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "168",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/168.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "169",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/169.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    134,
+    219,
+    13
+   ],
+   [
+    131,
+    62,
+    13
+   ],
+   [
+    204,
+    106,
+    13
+   ],
+   [
+    50,
+    52,
+    13
+   ],
+   [
+    62,
+    189,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "17",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/17.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "170",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/170.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    44,
+    46,
+    13
+   ],
+   [
+    217,
+    48,
+    13
+   ],
+   [
+    40,
+    214,
+    13
+   ],
+   [
+    209,
+    219,
+    13
+   ],
+   [
+    48,
+    98,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "171",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/171.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "172",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/172.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    214,
+    41,
+    13
+   ],
+   [
+    42,
+    36,
+    13
+   ],
+   [
+    134,
+    41,
+    13
+   ],
+   [
+    34,
+    129,
+    13
+   ],
+   [
+    212,
+    133,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "173",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/173.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    135,
+    126,
+    13
+   ],
+   [
+    17,
+    127,
+    13
+   ],
+   [
+    192,
+    140,
+    13
+   ],
+   [
+    113,
+    74,
+    13
+   ],
+   [
+    243,
+    55,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "174",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/174.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    42,
+    42,
+    13
+   ],
+   [
+    127,
+    42,
+    13
+   ],
+   [
+    42,
+    127,
+    13
+   ],
+   [
+    127,
+    127,
+    13
+   ],
+   [
+    212,
+    126,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "175",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/175.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    129,
+    214,
+    13
+   ],
+   [
+    45,
+    130,
+    13
+   ],
+   [
+    203,
+    125,
+    13
+   ],
+   [
+    119,
+    47,
+    13
+   ],
+   [
+    122,
+    122,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "176",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/176.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "177",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/177.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "178",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/178.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "179",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/179.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "18",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/18.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "180",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/180.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "181",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/181.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "182",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/182.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "183",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/183.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "184",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/184.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "185",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/185.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "186",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/186.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    63,
+    38,
+    13
+   ],
+   [
+    246,
+    28,
+    13
+   ],
+   [
+    105,
+    27,
+    13
+   ],
+   [
+    236,
+    31,
+    13
+   ],
+   [
+    116,
+    29,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "187",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/187.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "188",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/188.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "189",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/189.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "19",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/19.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "190",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/190.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "191",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/191.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "192",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/192.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "193",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/193.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    216,
+    33,
+    13
+   ],
+   [
+    43,
+    244,
+    13
+   ],
+   [
+    91,
+    244,
+    13
+   ],
+   [
+    167,
+    21,
+    13
+   ],
+   [
+    170,
+    5,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "194",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/194.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "195",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/195.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    127,
+    42,
+    13
+   ],
+   [
+    212,
+    129,
+    13
+   ],
+   [
+    212,
+    210,
+    13
+   ],
+   [
+    39,
+    130,
+    13
+   ],
+   [
+    136,
+    118,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "196",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/196.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    125,
+    212,
+    13
+   ],
+   [
+    40,
+    215,
+    13
+   ],
+   [
+    40,
+    64,
+    13
+   ],
+   [
+    198,
+    216,
+    13
+   ],
+   [
+    123,
+    62,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "197",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/197.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "198",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/198.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "199",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/199.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    69,
+    212,
+    13
+   ],
+   [
+    71,
+    150,
+    13
+   ],
+   [
+    88,
+    226,
+    13
+   ],
+   [
+    86,
+    157,
+    13
+   ],
+   [
+    86,
+    230,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "2",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/2.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    243,
+    28,
+    13
+   ],
+   [
+    252,
+    9,
+    13
+   ],
+   [
+    243,
+    35,
+    13
+   ],
+   [
+    255,
+    7,
+    13
+   ],
+   [
+    234,
+    19,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "20",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/20.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    111,
+    131,
+    13
+   ],
+   [
+    76,
+    119,
+    13
+   ],
+   [
+    123,
+    140,
+    13
+   ],
+   [
+    125,
+    129,
+    13
+   ],
+   [
+    79,
+    115,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "200",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/200.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    62,
+    127,
+    13
+   ],
+   [
+    99,
+    124,
+    13
+   ],
+   [
+    101,
+    67,
+    13
+   ],
+   [
+    67,
+    178,
+    13
+   ],
+   [
+    73,
+    75,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "201",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/201.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    97,
+    182,
+    13
+   ],
+   [
+    105,
+    182,
+    13
+   ],
+   [
+    98,
+    188,
+    13
+   ],
+   [
+    92,
+    183,
+    13
+   ],
+   [
+    104,
+    179,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "202",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/202.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    44,
+    231,
+    13
+   ],
+   [
+    52,
+    159,
+    13
+   ],
+   [
+    65,
+    218,
+    13
+   ],
+   [
+    64,
+    223,
+    13
+   ],
+   [
+    21,
+    248,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "203",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/203.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    212,
+    212,
+    13
+   ],
+   [
+    213,
+    43,
+    13
+   ],
+   [
+    39,
+    206,
+    13
+   ],
+   [
+    42,
+    47,
+    13
+   ],
+   [
+    216,
+    121,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "204",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/204.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "205",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/205.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "206",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/206.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "207",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/207.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "208",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/208.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "209",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/209.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "21",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/21.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "210",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/210.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "211",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/211.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "212",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/212.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "213",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/213.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "214",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/214.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "215",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/215.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "216",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/216.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    41,
+    42,
+    13
+   ],
+   [
+    116,
+    42,
+    13
+   ],
+   [
+    37,
+    121,
+    13
+   ],
+   [
+    226,
+    42,
+    13
+   ],
+   [
+    124,
+    124,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "217",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/217.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "218",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/218.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "219",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/219.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    129,
+    42,
+    13
+   ],
+   [
+    220,
+    37,
+    13
+   ],
+   [
+    25,
+    52,
+    13
+   ],
+   [
+    116,
+    48,
+    13
+   ],
+   [
+    15,
+    53,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "22",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/22.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "220",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/220.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "221",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/221.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    34,
+    213,
+    13
+   ],
+   [
+    130,
+    220,
+    13
+   ],
+   [
+    216,
+    214,
+    13
+   ],
+   [
+    225,
+    30,
+    13
+   ],
+   [
+    215,
+    138,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "222",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/222.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    185,
+    206,
+    13
+   ],
+   [
+    165,
+    209,
+    13
+   ],
+   [
+    180,
+    206,
+    13
+   ],
+   [
+    173,
+    193,
+    13
+   ],
+   [
+    175,
+    200,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "223",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/223.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    22,
+    215,
+    13
+   ],
+   [
+    22,
+    108,
+    13
+   ],
+   [
+    39,
+    71,
+    13
+   ],
+   [
+    42,
+    68,
+    13
+   ],
+   [
+    15,
+    111,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "224",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/224.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "225",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/225.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "226",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/226.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    228,
+    42,
+    13
+   ],
+   [
+    67,
+    14,
+    13
+   ],
+   [
+    94,
+    13,
+    13
+   ],
+   [
+    233,
+    88,
+    13
+   ],
+   [
+    81,
+    13,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "227",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/227.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "228",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/228.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "229",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/229.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "23",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/23.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    212,
+    212,
+    13
+   ],
+   [
+    212,
+    42,
+    13
+   ],
+   [
+    212,
+    127,
+    13
+   ],
+   [
+    127,
+    212,
+    13
+   ],
+   [
+    127,
+    42,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "230",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/230.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    20,
+    114,
+    13
+   ],
+   [
+    47,
+    192,
+    13
+   ],
+   [
+    54,
+    49,
+    13
+   ],
+   [
+    125,
+    236,
+    13
+   ],
+   [
+    91,
+    8,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "231",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/231.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "232",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/232.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "233",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/233.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "234",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/234.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "235",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/235.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "236",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/236.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "237",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/237.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "238",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/238.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "239",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/239.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "24",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/24.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "240",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/240.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "241",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/241.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    211,
+    146,
+    13
+   ],
+   [
+    193,
+    203,
+    13
+   ],
+   [
+    23,
+    118,
+    13
+   ],
+   [
+    62,
+    55,
+    13
+   ],
+   [
+    109,
+    16,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "242",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/242.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    50,
+    129,
+    13
+   ],
+   [
+    138,
+    127,
+    13
+   ],
+   [
+    208,
+    127,
+    13
+   ],
+   [
+    135,
+    55,
+    13
+   ],
+   [
+    44,
+    56,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "243",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/243.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "244",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/244.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "245",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/245.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "246",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/246.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "247",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/247.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "248",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/248.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "249",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/249.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "25",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/25.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "250",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/250.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    203,
+    230,
+    13
+   ],
+   [
+    205,
+    58,
+    13
+   ],
+   [
+    36,
+    39,
+    13
+   ],
+   [
+    44,
+    136,
+    13
+   ],
+   [
+    204,
+    133,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "251",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/251.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "252",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/252.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "253",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/253.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "254",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/254.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "255",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/255.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "256",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/256.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    133,
+    134,
+    13
+   ],
+   [
+    211,
+    47,
+    13
+   ],
+   [
+    126,
+    194,
+    13
+   ],
+   [
+    194,
+    121,
+    13
+   ],
+   [
+    51,
+    193,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "257",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/257.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "258",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/258.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    214,
+    128,
+    13
+   ],
+   [
+    225,
+    201,
+    13
+   ],
+   [
+    42,
+    133,
+    13
+   ],
+   [
+    54,
+    68,
+    13
+   ],
+   [
+    198,
+    64,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "259",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/259.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "26",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/26.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    215,
+    215,
+    13
+   ],
+   [
+    152,
+    236,
+    13
+   ],
+   [
+    202,
+    139,
+    13
+   ],
+   [
+    35,
+    121,
+    13
+   ],
+   [
+    135,
+    60,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "260",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/260.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "261",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/261.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    119,
+    244,
+    13
+   ],
+   [
+    73,
+    244,
+    13
+   ],
+   [
+    122,
+    230,
+    13
+   ],
+   [
+    109,
+    238,
+    13
+   ],
+   [
+    148,
+    254,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "262",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/262.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "263",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/263.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    212,
+    42,
+    13
+   ],
+   [
+    127,
+    213,
+    13
+   ],
+   [
+    212,
+    213,
+    13
+   ],
+   [
+    42,
+    42,
+    13
+   ],
+   [
+    127,
+    42,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "264",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/264.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "265",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/265.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "266",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/266.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "267",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/267.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    127,
+    127,
+    13
+   ],
+   [
+    128,
+    42,
+    13
+   ],
+   [
+    127,
+    205,
+    13
+   ],
+   [
+    52,
+    40,
+    13
+   ],
+   [
+    56,
+    125,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "268",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/268.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "269",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/269.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    43,
+    212,
+    13
+   ],
+   [
+    55,
+    245,
+    13
+   ],
+   [
+    32,
+    171,
+    13
+   ],
+   [
+    43,
+    213,
+    13
+   ],
+   [
+    45,
+    236,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "27",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/27.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    233,
+    42,
+    13
+   ],
+   [
+    23,
+    228,
+    13
+   ],
+   [
+    244,
+    222,
+    13
+   ],
+   [
+    13,
+    240,
+    13
+   ],
+   [
+    240,
+    248,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "270",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/270.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "271",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/271.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "272",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/272.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    216,
+    206,
+    13
+   ],
+   [
+    120,
+    23,
+    13
+   ],
+   [
+    119,
+    222,
+    13
+   ],
+   [
+    49,
+    228,
+    13
+   ],
+   [
+    218,
+    15,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "273",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/273.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "274",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/274.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "275",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/275.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "276",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/276.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "277",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/277.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "278",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/278.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    42,
+    212,
+    13
+   ],
+   [
+    127,
+    127,
+    13
+   ],
+   [
+    210,
+    131,
+    13
+   ],
+   [
+    215,
+    208,
+    13
+   ],
+   [
+    209,
+    38,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "279",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/279.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "28",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/28.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "280",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/280.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    127,
+    42,
+    13
+   ],
+   [
+    125,
+    215,
+    13
+   ],
+   [
+    123,
+    125,
+    13
+   ],
+   [
+    210,
+    48,
+    13
+   ],
+   [
+    41,
+    136,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "281",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/281.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    122,
+    213,
+    13
+   ],
+   [
+    123,
+    127,
+    13
+   ],
+   [
+    206,
+    213,
+    13
+   ],
+   [
+    205,
+    127,
+    13
+   ],
+   [
+    32,
+    213,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "282",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/282.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "283",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/283.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "284",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/284.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "285",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/285.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "286",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/286.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "287",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/287.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "288",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/288.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "289",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/289.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "29",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/29.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "290",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/290.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "291",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/291.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "292",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/292.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "293",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/293.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "294",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/294.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "295",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/295.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "296",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/296.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    16,
+    24,
+    13
+   ],
+   [
+    30,
+    107,
+    13
+   ],
+   [
+    115,
+    21,
+    13
+   ],
+   [
+    120,
+    23,
+    13
+   ],
+   [
+    8,
+    159,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "297",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/297.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "298",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/298.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "299",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/299.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "3",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/3.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "30",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/30.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "300",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/300.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "31",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/31.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "32",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/32.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "33",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/33.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    50,
+    126,
+    13
+   ],
+   [
+    203,
+    124,
+    13
+   ],
+   [
+    51,
+    52,
+    13
+   ],
+   [
+    137,
+    142,
+    13
+   ],
+   [
+    47,
+    196,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "34",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/34.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "35",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/35.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "36",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/36.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    124,
+    41,
+    13
+   ],
+   [
+    42,
+    126,
+    13
+   ],
+   [
+    220,
+    135,
+    13
+   ],
+   [
+    139,
+    217,
+    13
+   ],
+   [
+    192,
+    208,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "37",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/37.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    123,
+    126,
+    13
+   ],
+   [
+    215,
+    126,
+    13
+   ],
+   [
+    136,
+    211,
+    13
+   ],
+   [
+    133,
+    46,
+    13
+   ],
+   [
+    52,
+    48,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "38",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/38.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "39",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/39.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "4",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/4.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "40",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/40.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    34,
+    34,
+    13
+   ],
+   [
+    220,
+    33,
+    13
+   ],
+   [
+    127,
+    1,
+    13
+   ],
+   [
+    8,
+    94,
+    13
+   ],
+   [
+    250,
+    89,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "41",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/41.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    215,
+    41,
+    13
+   ],
+   [
+    201,
+    125,
+    13
+   ],
+   [
+    47,
+    128,
+    13
+   ],
+   [
+    58,
+    39,
+    13
+   ],
+   [
+    107,
+    124,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "42",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/42.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    34,
+    224,
+    13
+   ],
+   [
+    237,
+    20,
+    13
+   ],
+   [
+    235,
+    230,
+    13
+   ],
+   [
+    118,
+    237,
+    13
+   ],
+   [
+    15,
+    138,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "43",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/43.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "44",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/44.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "45",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/45.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "46",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/46.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    212,
+    42,
+    13
+   ],
+   [
+    42,
+    212,
+    13
+   ],
+   [
+    127,
+    212,
+    13
+   ],
+   [
+    42,
+    42,
+    13
+   ],
+   [
+    127,
+    42,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "47",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/47.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "48",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/48.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "49",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/49.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    131,
+    217,
+    13
+   ],
+   [
+    124,
+    44,
+    13
+   ],
+   [
+    200,
+    195,
+    13
+   ],
+   [
+    51,
+    232,
+    13
+   ],
+   [
+    62,
+    48,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "5",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/5.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    131,
+    52,
+    13
+   ],
+   [
+    129,
+    206,
+    13
+   ],
+   [
+    41,
+    226,
+    13
+   ],
+   [
+    207,
+    191,
+    13
+   ],
+   [
+    195,
+    41,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "50",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/50.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "51",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/51.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "52",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/52.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "53",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/53.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    213,
+    133,
+    13
+   ],
+   [
+    218,
+    26,
+    13
+   ],
+   [
+    127,
+    34,
+    13
+   ],
+   [
+    160,
+    122,
+    13
+   ],
+   [
+    81,
+    26,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "54",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/54.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "55",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/55.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "56",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/56.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "57",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/57.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    244,
+    195,
+    13
+   ],
+   [
+    250,
+    157,
+    13
+   ],
+   [
+    235,
+    190,
+    13
+   ],
+   [
+    255,
+    158,
+    13
+   ],
+   [
+    247,
+    189,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "58",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/58.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "59",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/59.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "6",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/6.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    193,
+    126,
+    13
+   ],
+   [
+    149,
+    123,
+    13
+   ],
+   [
+    136,
+    52,
+    13
+   ],
+   [
+    179,
+    196,
+    13
+   ],
+   [
+    161,
+    194,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "60",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/60.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "61",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/61.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    128,
+    121,
+    13
+   ],
+   [
+    198,
+    113,
+    13
+   ],
+   [
+    130,
+    70,
+    13
+   ],
+   [
+    74,
+    140,
+    13
+   ],
+   [
+    68,
+    36,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "62",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/62.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    229,
+    124,
+    13
+   ],
+   [
+    20,
+    193,
+    13
+   ],
+   [
+    136,
+    240,
+    13
+   ],
+   [
+    30,
+    157,
+    13
+   ],
+   [
+    187,
+    243,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "63",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/63.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "64",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/64.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "65",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/65.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    39,
+    210,
+    13
+   ],
+   [
+    46,
+    130,
+    13
+   ],
+   [
+    119,
+    214,
+    13
+   ],
+   [
+    123,
+    141,
+    13
+   ],
+   [
+    227,
+    114,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "66",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/66.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "67",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/67.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "68",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/68.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    51,
+    152,
+    13
+   ],
+   [
+    36,
+    180,
+    13
+   ],
+   [
+    91,
+    132,
+    13
+   ],
+   [
+    29,
+    155,
+    13
+   ],
+   [
+    28,
+    149,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "69",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/69.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    32,
+    128,
+    13
+   ],
+   [
+    35,
+    207,
+    13
+   ],
+   [
+    27,
+    43,
+    13
+   ],
+   [
+    221,
+    45,
+    13
+   ],
+   [
+    211,
+    208,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "7",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/7.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "70",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/70.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    9,
+    50,
+    13
+   ],
+   [
+    23,
+    219,
+    13
+   ],
+   [
+    127,
+    240,
+    13
+   ],
+   [
+    17,
+    133,
+    13
+   ],
+   [
+    188,
+    254,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "71",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/71.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    249,
+    137,
+    13
+   ],
+   [
+    245,
+    208,
+    13
+   ],
+   [
+    251,
+    53,
+    13
+   ],
+   [
+    157,
+    228,
+    13
+   ],
+   [
+    253,
+    149,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "72",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/72.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "73",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/73.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    127,
+    42,
+    13
+   ],
+   [
+    125,
+    124,
+    13
+   ],
+   [
+    204,
+    125,
+    13
+   ],
+   [
+    205,
+    210,
+    13
+   ],
+   [
+    202,
+    43,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "74",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/74.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "75",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/75.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    129,
+    10,
+    13
+   ],
+   [
+    240,
+    126,
+    13
+   ],
+   [
+    23,
+    217,
+    13
+   ],
+   [
+    205,
+    52,
+    13
+   ],
+   [
+    242,
+    193,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "76",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/76.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "77",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/77.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "78",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/78.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "79",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/79.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "8",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/8.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "80",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/80.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "81",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/81.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "82",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/82.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    104,
+    15,
+    13
+   ],
+   [
+    39,
+    125,
+    13
+   ],
+   [
+    29,
+    116,
+    13
+   ],
+   [
+    37,
+    136,
+    13
+   ],
+   [
+    46,
+    132,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "83",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/83.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "84",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/84.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "85",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/85.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "86",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/86.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    222,
+    34,
+    13
+   ],
+   [
+    189,
+    238,
+    13
+   ],
+   [
+    18,
+    238,
+    13
+   ],
+   [
+    154,
+    239,
+    13
+   ],
+   [
+    245,
+    93,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "87",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/87.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "88",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/88.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "89",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/89.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "9",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/9.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "90",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/90.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "91",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/91.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "92",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/92.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "93",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/93.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "94",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/94.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    216,
+    217,
+    13
+   ],
+   [
+    215,
+    45,
+    13
+   ],
+   [
+    44,
+    45,
+    13
+   ],
+   [
+    122,
+    120,
+    13
+   ],
+   [
+    123,
+    31,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "95",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/95.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "96",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/96.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "97",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/97.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    111,
+    54,
+    13
+   ],
+   [
+    107,
+    89,
+    13
+   ],
+   [
+    251,
+    101,
+    13
+   ],
+   [
+    3,
+    243,
+    13
+   ],
+   [
+    246,
+    84,
+    13
+   ]
+  ]
+ },
+ {
+  "id": "98",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/98.png",
+  "width": 256,
+  "height": 256,
+  "points": []
+ },
+ {
+  "id": "99",
+  "image": "/home/cse-sdpl/Downloads/point_only_semseg/dlrsd_new/train_images/99.png",
+  "width": 256,
+  "height": 256,
+  "points": [
+   [
+    20,
+    41,
+    13
+   ],
+   [
+    110,
+    243,
+    13
+   ],
+   [
+    17,
+    246,
+    13
+   ],
+   [
+    109,
+    255,
+    13
+   ],
+   [
+    10,
+    255,
+    13
+   ]
+  ]
+ }
+]

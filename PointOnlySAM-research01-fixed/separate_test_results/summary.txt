@@ -1,0 +1,96 @@
+PointOnlySAM-Fixed External Evaluation
+==================================================
+Checkpoint: training2-runs/checkpoints/epoch_040.pt
+Input dir: ../separate_test_images_for_POSFixed
+Images: 84
+Device: cuda
+Total time: 30.9s
+Avg per image: 0.37s
+
+==================================================
+Predictions (per image):
+--------------------------------------------------
+  1/84  agricultural_000.png                      dominant=field            (99.2%)  time=1.42s
+  2/84  agricultural_001.png                      dominant=grass            (59.5%)  time=0.35s
+  3/84  agricultural_002.png                      dominant=field            (99.2%)  time=0.34s
+  4/84  agricultural_003.png                      dominant=field            (99.2%)  time=0.34s
+  5/84  airplane_004.png                          dominant=pavement         (46.4%)  time=0.36s
+  6/84  airplane_005.png                          dominant=pavement         (54.2%)  time=0.37s
+  7/84  airplane_006.png                          dominant=pavement         (72.2%)  time=0.38s
+  8/84  airplane_007.png                          dominant=grass            (86.7%)  time=0.37s
+  9/84  baseballdiamond_008.png                   dominant=grass            (83.1%)  time=0.37s
+ 10/84  baseballdiamond_009.png                   dominant=grass            (63.6%)  time=0.36s
+ 11/84  baseballdiamond_010.png                   dominant=grass            (83.2%)  time=0.36s
+ 12/84  baseballdiamond_011.png                   dominant=grass            (47.9%)  time=0.36s
+ 13/84  beach_012.png                             dominant=sea              (60.8%)  time=0.35s
+ 14/84  beach_013.png                             dominant=sea              (61.5%)  time=0.34s
+ 15/84  beach_014.png                             dominant=sea              (63.6%)  time=0.34s
+ 16/84  beach_015.png                             dominant=sea              (72.5%)  time=0.34s
+ 17/84  buildings_016.png                         dominant=buildings        (29.3%)  time=0.34s
+ 18/84  buildings_017.png                         dominant=buildings        (52.1%)  time=0.34s
+ 19/84  buildings_018.png                         dominant=buildings        (56.1%)  time=0.34s
+ 20/84  buildings_019.png                         dominant=buildings        (62.7%)  time=0.34s
+ 21/84  chaparral_020.png                         dominant=bare_soil        (82.0%)  time=0.34s
+ 22/84  chaparral_021.png                         dominant=bare_soil        (77.3%)  time=0.34s
+ 23/84  chaparral_022.png                         dominant=bare_soil        (79.9%)  time=0.34s
+ 24/84  chaparral_023.png                         dominant=bare_soil        (83.6%)  time=0.34s
+ 25/84  dense_residential_dense_residential_024.png  dominant=trees            (33.6%)  time=0.34s
+ 26/84  dense_residential_dense_residential_025.png  dominant=buildings        (63.4%)  time=0.36s
+ 27/84  dense_residential_dense_residential_026.png  dominant=buildings        (73.6%)  time=0.35s
+ 28/84  dense_residential_dense_residential_027.png  dominant=buildings        (52.9%)  time=0.38s
+ 29/84  forest_028.png                            dominant=trees            (100.0%)  time=0.37s
+ 30/84  forest_029.png                            dominant=trees            (100.0%)  time=0.37s
+ 31/84  forest_030.png                            dominant=trees            (100.0%)  time=0.37s
+ 32/84  forest_031.png                            dominant=trees            (99.9%)  time=0.35s
+ 33/84  freeway_032.png                           dominant=grass            (50.0%)  time=0.35s
+ 34/84  freeway_033.png                           dominant=pavement         (85.6%)  time=0.34s
+ 35/84  freeway_034.png                           dominant=pavement         (79.4%)  time=0.34s
+ 36/84  freeway_035.png                           dominant=pavement         (94.4%)  time=0.34s
+ 37/84  golfcourse_036.png                        dominant=grass            (71.8%)  time=0.34s
+ 38/84  golfcourse_037.png                        dominant=grass            (70.2%)  time=0.35s
+ 39/84  golfcourse_038.png                        dominant=grass            (80.7%)  time=0.34s
+ 40/84  golfcourse_039.png                        dominant=grass            (84.9%)  time=0.34s
+ 41/84  harbor_040.png                            dominant=water            (80.2%)  time=0.34s
+ 42/84  harbor_041.png                            dominant=water            (75.2%)  time=0.34s
+ 43/84  harbor_042.png                            dominant=water            (68.3%)  time=0.34s
+ 44/84  harbor_043.png                            dominant=water            (67.6%)  time=0.34s
+ 45/84  intersection_044.png                      dominant=pavement         (55.9%)  time=0.34s
+ 46/84  intersection_045.png                      dominant=pavement         (66.2%)  time=0.37s
+ 47/84  intersection_046.png                      dominant=pavement         (72.5%)  time=0.38s
+ 48/84  intersection_047.png                      dominant=pavement         (66.5%)  time=0.37s
+ 49/84  medium_residential_medium_residential_048.png  dominant=buildings        (38.8%)  time=0.37s
+ 50/84  medium_residential_medium_residential_049.png  dominant=bare_soil        (36.4%)  time=0.38s
+ 51/84  medium_residential_medium_residential_050.png  dominant=trees            (44.6%)  time=0.38s
+ 52/84  medium_residential_medium_residential_051.png  dominant=bare_soil        (38.4%)  time=0.38s
+ 53/84  mobilehomepark_052.png                    dominant=mobile_home      (40.8%)  time=0.38s
+ 54/84  mobilehomepark_053.png                    dominant=mobile_home      (41.7%)  time=0.38s
+ 55/84  mobilehomepark_054.png                    dominant=pavement         (36.8%)  time=0.38s
+ 56/84  mobilehomepark_055.png                    dominant=mobile_home      (46.6%)  time=0.37s
+ 57/84  overpass_056.png                          dominant=pavement         (73.5%)  time=0.36s
+ 58/84  overpass_057.png                          dominant=pavement         (60.2%)  time=0.35s
+ 59/84  overpass_058.png                          dominant=grass            (65.2%)  time=0.35s
+ 60/84  overpass_059.png                          dominant=pavement         (65.4%)  time=0.34s
+ 61/84  parkinglot_060.png                        dominant=pavement         (57.8%)  time=0.35s
+ 62/84  parkinglot_061.png                        dominant=pavement         (66.3%)  time=0.34s
+ 63/84  parkinglot_062.png                        dominant=pavement         (78.3%)  time=0.37s
+ 64/84  parkinglot_063.png                        dominant=pavement         (55.8%)  time=0.37s
+ 65/84  river_064.png                             dominant=sea              (56.7%)  time=0.37s
+ 66/84  river_065.png                             dominant=trees            (90.2%)  time=0.37s
+ 67/84  river_066.png                             dominant=bare_soil        (56.3%)  time=0.38s
+ 68/84  river_067.png                             dominant=grass            (37.3%)  time=0.38s
+ 69/84  runway_068.png                            dominant=pavement         (90.9%)  time=0.37s
+ 70/84  runway_069.png                            dominant=pavement         (94.5%)  time=0.37s
+ 71/84  runway_070.png                            dominant=pavement         (89.5%)  time=0.37s
+ 72/84  runway_071.png                            dominant=pavement         (80.9%)  time=0.36s
+ 73/84  sparse_residential_sparse_residential_072.png  dominant=grass            (73.3%)  time=0.35s
+ 74/84  sparse_residential_sparse_residential_073.png  dominant=grass            (64.0%)  time=0.35s
+ 75/84  sparse_residential_sparse_residential_074.png  dominant=grass            (51.7%)  time=0.35s
+ 76/84  sparse_residential_sparse_residential_075.png  dominant=grass            (87.1%)  time=0.34s
+ 77/84  storagetanks_076.png                      dominant=bare_soil        (37.8%)  time=0.34s
+ 78/84  storagetanks_077.png                      dominant=grass            (64.5%)  time=0.34s
+ 79/84  storagetanks_078.png                      dominant=grass            (46.0%)  time=0.34s
+ 80/84  storagetanks_079.png                      dominant=pavement         (44.3%)  time=0.34s
+ 81/84  tenniscourt_080.png                       dominant=buildings        (32.7%)  time=0.34s
+ 82/84  tenniscourt_081.png                       dominant=pavement         (29.9%)  time=0.35s
+ 83/84  tenniscourt_082.png                       dominant=buildings        (27.3%)  time=0.34s
+ 84/84  tenniscourt_083.png                       dominant=court            (61.1%)  time=0.34s

@@ -1,7 +1,0 @@
-# Tested against the shared workspace virtual environment (Python 3.10+).
-torch
-numpy
-opencv-python
-# tqdm is optional; scripts fall back to plain iteration when it is absent.
-# SAM is imported from ../PointSAM/segment_anything; do not pip-install a
-# different segment-anything build for this experiment.
